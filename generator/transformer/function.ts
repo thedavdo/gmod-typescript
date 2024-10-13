@@ -60,8 +60,12 @@ function transformArgs(func: WikiFunction): TSArgument[] {
             }
         }
 
+        let id = (type == 'vararg' ? '...' : '') + transformIdentifier(arg.name)
+
+        if(id == "delete") id = "shouldDelete"
+
         return {
-            identifier: (type == 'vararg' ? '...' : '') + transformIdentifier(arg.name),
+            identifier: id,
             default: defaultValue,
             type: transformType(type),
         } as TSArgument;
@@ -75,14 +79,20 @@ function inferType(type: string, desc: string) {
         const renameMods = mods.filter(isRenameIndentifierModification);
         if (renameMods.length > 0) {
             type = renameMods[0].newName;
-        } else if (links[1].includes('Structures')) {
-            type = links[1].split('/')[1];
-        } else if (links[1].includes('Enum')) {
-            type = links[1].split('/')[1];
         } else if (links[1] === 'Color') {
             type = 'Color';
         }
     }
+
+    if(type.includes('/')) {
+
+        let slashSplit = type.split('/');
+
+        if (slashSplit.length > 1) {
+            type = slashSplit[1];
+        }
+    }
+
     return type;
 }
 
