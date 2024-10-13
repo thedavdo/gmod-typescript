@@ -13,6 +13,7 @@ export function parseMarkup(markup: string, extraOptions: parser.X2jOptionsOptio
     markup = `<root>${markup}</root>`;
 
     markup = markup
+        .replace( `"\\"\\""`, '"\\"')
         .replace(/&/g, '&amp;')
         .replace(/ < /g, ' &lt; ')
         .replace(/<\?php/g, '&lt;?php')
