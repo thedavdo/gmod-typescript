@@ -35,7 +35,10 @@ export function printFunction(
                 : false;
 
         if (canParseDefault) {
-            return `${a.identifier} = ${a.default}`;
+
+            let def = (a.type == 'string') ? `'${ a.default }'` : a.default 
+            return `${a.identifier} = ${def}`;
+            
         } else if (isOptional) {
             return `${a.identifier}?: ${a.type}`;
         } else {
