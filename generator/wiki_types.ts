@@ -100,6 +100,7 @@ export interface WikiStruct extends WikiAddressable, WikiElement {
     name: string;
     description: string;
     realm: string;
+    parent?: string;
     items: WikiStructItem[];
 }
 
