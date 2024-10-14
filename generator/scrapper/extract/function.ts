@@ -45,6 +45,9 @@ export function extractFunction(page: WikiPage): WikiFunction | WikiStructItem {
 
     const functionObj = markupObj.function[0];
 
+    if (!functionObj.realm && markupObj.realm) functionObj.realm = markupObj.realm;
+    if (!functionObj.rets && markupObj.rets) functionObj.rets = markupObj.rets;
+
     const argObjToArgument = (argObj: any) => {
         const arg = {
             description: argObj.__text ? argObj.__text.trim() : '',
@@ -65,10 +68,11 @@ export function extractFunction(page: WikiPage): WikiFunction | WikiStructItem {
     };
 
     const retObjToReturn = (retObj: any) =>
-        ({
-            description: retObj.__text ? retObj.__text.trim() : '',
-            type: retObj.attr.type,
-        } as WikiReturn);
+    ({
+        description: retObj.__text ? retObj.__text.trim() : '',
+        type: retObj.attr.type,
+    } as WikiReturn);
+
 
     return {
         name: functionObj.attr.name,

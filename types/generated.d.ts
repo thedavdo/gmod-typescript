@@ -6540,14 +6540,14 @@ interface Entity {
     GetPlaybackRate(): number;
     
     /**
-     * [undefined]
+     * [Shared]
      * 
      * Gets the position of given entity in the world.
      * 
      * See [Entity:GetLocalPos](https://wiki.facepunch.com/gmod/Entity:GetLocalPos) for the position relative to the entity's [Entity:GetParent](https://wiki.facepunch.com/gmod/Entity:GetParent).
      * 
      */
-    GetPos(): void;
+    GetPos(): Vector;
     
     /**
      * [Shared]
@@ -7819,7 +7819,7 @@ interface Entity {
      * @param vertices - A table consisting of [Structures/MeshVertex](https://wiki.facepunch.com/gmod/Structures/MeshVertex) (only the `pos` element is taken into account). Every 3 vertices define a triangle in the physics mesh.
      * @param [surfaceprop = default] - Physical material from [surfaceproperties.txt](https://github.com/Facepunch/garrysmod/blob/master/garrysmod/scripts/surfaceproperties.txt) or added with [physenv.AddSurfaceData](https://wiki.facepunch.com/gmod/physenv.AddSurfaceData).
      */
-    PhysicsFromMesh(vertices: MeshVertex, surfaceprop?: string): void;
+    PhysicsFromMesh(vertices: MeshVertex, surfaceprop?: string): boolean;
     
     /**
      * [Shared]
@@ -7867,7 +7867,7 @@ interface Entity {
      * @param maxs - The maximum position of the box. This is automatically ordered with the mins.
      * @param [surfaceprop = default] - Physical material from [surfaceproperties.txt](https://github.com/Facepunch/garrysmod/blob/master/garrysmod/scripts/surfaceproperties.txt) or added with [physenv.AddSurfaceData](https://wiki.facepunch.com/gmod/physenv.AddSurfaceData).
      */
-    PhysicsInitBox(mins: Vector, maxs: Vector, surfaceprop?: string): void;
+    PhysicsInitBox(mins: Vector, maxs: Vector, surfaceprop?: string): boolean;
     
     /**
      * [Shared]
@@ -7899,7 +7899,7 @@ interface Entity {
      * @param points - A table of eight [Vector](https://wiki.facepunch.com/gmod/Vector)s, in local coordinates, to be used in the computation of the convex mesh. Order does not matter.
      * @param [surfaceprop = default] - Physical material from [surfaceproperties.txt](https://github.com/Facepunch/garrysmod/blob/master/garrysmod/scripts/surfaceproperties.txt) or added with [physenv.AddSurfaceData](https://wiki.facepunch.com/gmod/physenv.AddSurfaceData).
      */
-    PhysicsInitConvex(points: any, surfaceprop?: string): void;
+    PhysicsInitConvex(points: any, surfaceprop?: string): boolean;
     
     /**
      * [Shared]
@@ -7916,7 +7916,7 @@ interface Entity {
      * @param vertices - A table consisting of tables of [Vector](https://wiki.facepunch.com/gmod/Vector)s. Each sub-table defines a set of points to be used in the computation of one convex mesh.
      * @param [surfaceprop = default] - Physical material from [surfaceproperties.txt](https://github.com/Facepunch/garrysmod/blob/master/garrysmod/scripts/surfaceproperties.txt) or added with [physenv.AddSurfaceData](https://wiki.facepunch.com/gmod/physenv.AddSurfaceData).
      */
-    PhysicsInitMultiConvex(vertices: any, surfaceprop?: string): void;
+    PhysicsInitMultiConvex(vertices: any, surfaceprop?: string): boolean;
     
     /**
      * [Shared]
@@ -66649,7 +66649,7 @@ declare namespace net {
     function WriteDouble(double: number): void;
     
     /**
-     * [undefined]
+     * [Shared]
      * 
      * Appends an entity to the current net message using its [Entity:EntIndex](https://wiki.facepunch.com/gmod/Entity:EntIndex).
      * 
