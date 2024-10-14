@@ -1,3 +1,4 @@
+import { isStringLiteral } from 'typescript';
 import {
     WikiFunction,
     WikiPage,
@@ -10,7 +11,21 @@ import { parseMarkup } from '../util';
 
 /** Can also return a struct field because apperaently some function collections include "NOT A FUNCTION" members... */
 export function extractFunction(page: WikiPage): WikiFunction | WikiStructItem {
-    const markupObj = parseMarkup(page.markup, {
+
+    let markup = page.markup;
+
+    const codeRegex = /<code>([\s\S]*?)<\/code>/g;
+    markup = markup.replace(codeRegex, (match, p1) => {
+        const escapedCode = p1
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#039;');
+        return `<code>${escapedCode}</code>`;
+    });
+
+    const markupObj = parseMarkup(markup, {
         stopNodes: ['description', 'ret', 'arg'],
     });
 
@@ -79,7 +94,7 @@ export function extractFunction(page: WikiPage): WikiFunction | WikiStructItem {
         parent: functionObj.attr.parent,
         examples: [],
         kind: WikiElementKind.Function,
-        description: functionObj.description ? functionObj.description.trim() : '',
+        description: (functionObj.description &&  (functionObj.description.trim)) ? functionObj.description.trim() : '',
         realm: functionObj.realm,
         args: functionObj.args ? functionObj.args[0].arg.map(argObjToArgument) : [],
         rets: functionObj.rets ? functionObj.rets[0].ret.map(retObjToReturn) : [],
