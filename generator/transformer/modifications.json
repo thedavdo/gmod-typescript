@@ -1,40 +1,4 @@
 {
-    "NextBot": [
-        {
-            "kind": "AddParent",
-            "parent": "Entity"
-        }
-    ],
-    "Player": [
-        {
-            "kind": "AddParent",
-            "parent": "Entity"
-        }
-    ],
-    "Weapon": [
-        {
-            "kind": "AddParent",
-            "parent": "Entity"
-        }
-    ],
-    "NPC": [
-        {
-            "kind": "AddParent",
-            "parent": "Entity"
-        }
-    ],
-    "Vehicle": [
-        {
-            "kind": "AddParent",
-            "parent": "Entity"
-        }
-    ],
-    "CSEnt": [
-        {
-            "kind": "AddParent",
-            "parent": "Entity"
-        }
-    ],
     "ContentIcon": [
         {
             "kind": "OmitParentField",

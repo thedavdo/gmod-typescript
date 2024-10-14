@@ -3476,7 +3476,7 @@ interface CRecipientFilter {
  * 
  * Its base class is [Entity](https://wiki.facepunch.com/gmod/Entity) so it inherits all of the client and shared functions used by [Entity](https://wiki.facepunch.com/gmod/Entity).
  */
-interface CSEnt extends Entity, Entity {
+interface CSEnt extends Entity {
     
 
     /**
@@ -11971,7 +11971,7 @@ interface MarkupObject {
  * 
  * See [NextBot NPC Creation](https://wiki.facepunch.com/gmod/NextBot_NPC_Creation) for more information on how to create NextBot NPCs.
  */
-interface NextBot extends Entity, Entity {
+interface NextBot extends Entity {
     
 
     /**
@@ -12174,7 +12174,7 @@ interface NextBot extends Entity, Entity {
 /**
  * This is a list of all methods only available for NPCs. It is also possible to call [Entity](https://wiki.facepunch.com/gmod/Entity) functions on NPCs.
  */
-interface NPC extends Entity, Entity {
+interface NPC extends Entity {
     
 
     /**
@@ -17713,7 +17713,7 @@ interface pixelvis_handle_t {
 /**
  * This is a list of all methods only available for players. It is also possible to call [Entity](https://wiki.facepunch.com/gmod/Entity) functions on the Player.
  */
-interface Player extends Entity, Entity {
+interface Player extends Entity {
     
 
     /**
@@ -21928,7 +21928,7 @@ interface Vector {
 /**
  * This is a list of all methods only available for vehicles. It is also possible to call [Entity](https://wiki.facepunch.com/gmod/Entity) functions on vehicles.
  */
-interface Vehicle extends Entity, Entity {
+interface Vehicle extends Entity {
     
 
     /**
@@ -22717,7 +22717,7 @@ interface VMatrix {
  * >A list of available methods has been expanded in your navigation bar.
  * 
  */
-interface Weapon extends Entity, Entity {
+interface Weapon extends Entity {
     
 
     /**
