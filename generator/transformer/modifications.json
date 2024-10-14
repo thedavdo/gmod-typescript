@@ -1,4 +1,10 @@
 {
+    "SWEP": [
+        {
+            "kind": "AddParent",
+            "parent": "WEAPON"
+        }
+    ],
     "ContentIcon": [
         {
             "kind": "OmitParentField",
