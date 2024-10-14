@@ -45,6 +45,7 @@ import { isWikiFunction, WikiFunctionCollection } from './wiki_types';
     const classFuncs = classFuncsPages
         .filter((p) => p.title.includes(':') || p.title.includes('.'))
         .map(extractFunction);
+
     const classes = classFuncsPages
         .filter((p) => !p.title.includes(':') && !p.title.includes('.'))
         .map(extractClass);
@@ -58,6 +59,30 @@ import { isWikiFunction, WikiFunctionCollection } from './wiki_types';
         )
         .map(printInterface)
         .join('\n\n');
+
+    const hookFuncPaths = [
+        ...(await GetPagesInCategory('hook')),
+    ];
+    const hookFuncsPages = await Promise.all(hookFuncPaths.map((page) => GetPage(page)));
+    // TODO || p.title.includes('.') is hack for panelfields....
+    const hookFuncs = hookFuncsPages
+        .filter((p) => p.title.includes(':') || p.title.includes('.'))
+        .map(extractFunction);
+
+    const hooks = hookFuncsPages
+        .filter((p) => !p.title.includes(':') && !p.title.includes('.'))
+        .map(extractClass);
+
+    const hookResult = hooks
+        .map((wikiClass) =>
+            transformFunctionCollection(
+                wikiClass,
+                hookFuncs.filter((cf) => cf.parent === wikiClass.name)
+            )
+        )
+        .map(printInterface)
+        .join('\n\n');
+
 
     const libraryFuncPaths = await GetPagesInCategory('libraryfunc');
     const libraryFuncPages = await Promise.all(libraryFuncPaths.map((page) => GetPage(page)));
@@ -79,6 +104,7 @@ import { isWikiFunction, WikiFunctionCollection } from './wiki_types';
         '/// <reference path="./extras.d.ts" />',
         '/** @noSelfInFile **/',
         classResult,
+        hookResult,
         structResult,
         enumResult,
         globalFunctionResult,
