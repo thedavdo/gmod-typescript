@@ -1,9 +1,33 @@
 import { TSCollection, TSField } from '../ts_types';
 import { WikiStruct, WikiStructItem } from '../wiki_types';
 import { createRealmString, transformDescription } from './description';
+import { getPageMods, isAddParentModification, isOmitParentFieldModification } from './modification_db';
 import { transformIdentifier, transformType } from './util';
 
 export function transformStruct(wikiStruct: WikiStruct): TSCollection {
+
+    const mods = getPageMods(wikiStruct.name);
+
+    const parents = mods.filter(isAddParentModification).map((mod) => mod.parent);
+    const omits = mods.filter(isOmitParentFieldModification);
+
+    if (wikiStruct.parent) {
+        parents.push(wikiStruct.parent);
+    }
+
+    const parentsModified = parents;
+
+    for (const omit of omits) {
+        if (parents.length > 0) {
+            const parentIndex = omit.parent ? parentsModified.indexOf(omit.parent) : 0;
+            if (parentIndex != -1) {
+                parentsModified[parentIndex] = `Omit<${
+                    parentsModified[parentIndex]
+                }, ${omit.omits.map((o) => `"${o}"`).join(' | ')}>`;
+            }
+        }
+    }
+    
     return {
         identifier: wikiStruct.name,
         docComment:
@@ -12,6 +36,7 @@ export function transformStruct(wikiStruct: WikiStruct): TSCollection {
             transformDescription(wikiStruct.description),
         fields: wikiStruct.items.map(transformStructField),
         functions: [],
+        parent: parentsModified.join(', '),
         namespace: false,
         innerCollections: [],
     };
