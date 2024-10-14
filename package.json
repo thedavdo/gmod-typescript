@@ -1,11 +1,12 @@
 {
-    "name": "gmod-types",
+    "name": "gmod-tstl-types",
     "version": "0.4.1",
     "description": "",
     "main": "index.js",
     "scripts": {
         "build": "tsc -p generator/tsconfig.json",
         "generate": "node dist/index.js",
+        "dev": "npm run build && npm run generate",
         "test": "tsc -p .",
         "lint": "prettier --check .",
         "lint:fix": "prettier --write .",
