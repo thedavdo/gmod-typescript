@@ -407,7 +407,7 @@ interface CEffectData {
      * Returns the damage type of the effect
      * 
      */
-    GetDamageType(): number;
+    GetDamageType(): DMG;
     
     /**
      * [Server]
@@ -545,7 +545,7 @@ interface CEffectData {
      * Sets the damage type of the effect to be created with this effect data.
      * @param damageType - Damage type, see [Enums/DMG](https://wiki.facepunch.com/gmod/Enums/DMG).
      */
-    SetDamageType(damageType: number): void;
+    SetDamageType(damageType: DMG): void;
     
     /**
      * [Server]
@@ -1532,7 +1532,7 @@ interface CMoveData {
      * Adds keys to the move data, as if player pressed them.
      * @param keys - Keys to add, see [Enums/IN](https://wiki.facepunch.com/gmod/Enums/IN)
      */
-    AddKey(keys: number): void;
+    AddKey(keys: IN): void;
     
     /**
      * [Shared]
@@ -1556,7 +1556,7 @@ interface CMoveData {
      * Gets which buttons are down
      * 
      */
-    GetButtons(): number;
+    GetButtons(): IN;
     
     /**
      * [Shared]
@@ -1668,7 +1668,7 @@ interface CMoveData {
      * Get which buttons were down last frame
      * 
      */
-    GetOldButtons(): number;
+    GetOldButtons(): IN;
     
     /**
      * [Shared]
@@ -1712,7 +1712,7 @@ interface CMoveData {
      * Returns whether the key is down or not
      * @param key - The key to test, see [Enums/IN](https://wiki.facepunch.com/gmod/Enums/IN)
      */
-    KeyDown(key: number): boolean;
+    KeyDown(key: IN): boolean;
     
     /**
      * [Shared]
@@ -1720,7 +1720,7 @@ interface CMoveData {
      * Returns whether the key was pressed. If you want to check if the key is held down, try [CMoveData:KeyDown](https://wiki.facepunch.com/gmod/CMoveData:KeyDown)
      * @param key - The key to test, see [Enums/IN](https://wiki.facepunch.com/gmod/Enums/IN)
      */
-    KeyPressed(key: number): boolean;
+    KeyPressed(key: IN): boolean;
     
     /**
      * [Shared]
@@ -1728,7 +1728,7 @@ interface CMoveData {
      * Returns whether the key was released
      * @param key - A key to test, see [Enums/IN](https://wiki.facepunch.com/gmod/Enums/IN)
      */
-    KeyReleased(key: number): boolean;
+    KeyReleased(key: IN): boolean;
     
     /**
      * [Shared]
@@ -1738,7 +1738,7 @@ interface CMoveData {
      * Unlike [CMoveData:KeyDown](https://wiki.facepunch.com/gmod/CMoveData:KeyDown), it will return false if [CMoveData:KeyPressed](https://wiki.facepunch.com/gmod/CMoveData:KeyPressed) is true and it will return true if [CMoveData:KeyReleased](https://wiki.facepunch.com/gmod/CMoveData:KeyReleased) is true.
      * @param key - The key to test, see [Enums/IN](https://wiki.facepunch.com/gmod/Enums/IN)
      */
-    KeyWasDown(key: number): boolean;
+    KeyWasDown(key: IN): boolean;
     
     /**
      * [Shared]
@@ -1766,7 +1766,7 @@ interface CMoveData {
      * Sets the pressed buttons on the move data
      * @param buttons - A number representing which buttons are down, see [Enums/IN](https://wiki.facepunch.com/gmod/Enums/IN)
      */
-    SetButtons(buttons: number): void;
+    SetButtons(buttons: IN): void;
     
     /**
      * [Shared]
@@ -1897,7 +1897,7 @@ interface CMoveData {
      * Sets the 'old' pressed buttons on the move data. These buttons are used to work out which buttons have been released, which have just been pressed and which are being held down.
      * @param buttons - A number representing which buttons were down, see [Enums/IN](https://wiki.facepunch.com/gmod/Enums/IN)
      */
-    SetOldButtons(buttons: number): void;
+    SetOldButtons(buttons: IN): void;
     
     /**
      * [Shared]
@@ -1945,7 +1945,7 @@ interface CNavArea {
      * Adds given attributes to given [CNavArea](https://wiki.facepunch.com/gmod/CNavArea). See [CNavArea:HasAttributes](https://wiki.facepunch.com/gmod/CNavArea:HasAttributes) and [CNavArea:SetAttributes](https://wiki.facepunch.com/gmod/CNavArea:SetAttributes).
      * @param attribs - The attributes to add, as a bitflag. See [Enums/NAV_MESH](https://wiki.facepunch.com/gmod/Enums/NAV_MESH).
      */
-    AddAttributes(attribs: number): void;
+    AddAttributes(attribs: NAV_MESH): void;
     
     /**
      * [Server]
@@ -2074,7 +2074,7 @@ interface CNavArea {
      * If an area has a one-way incoming connection to this [CNavArea](https://wiki.facepunch.com/gmod/CNavArea), then it will **not** be returned from this function, use [CNavArea:GetIncomingConnectionDistances](https://wiki.facepunch.com/gmod/CNavArea:GetIncomingConnectionDistances) to get all one-way incoming connections.
      * @param [dir = nil] - If set, will only return areas in the specified direction. See [Enums/NAVDIR](https://wiki.facepunch.com/gmod/Enums/NAVDIR).
      */
-    GetAdjacentAreaDistances(dir?: number): any;
+    GetAdjacentAreaDistances(dir?: NAVDIR): any;
     
     /**
      * [Server]
@@ -2150,7 +2150,7 @@ interface CNavArea {
      * Returns the vector position of the corner for the given [CNavArea](https://wiki.facepunch.com/gmod/CNavArea).
      * @param cornerid - The target corner to get the position of, takes [Enums/NavCorner](https://wiki.facepunch.com/gmod/Enums/NavCorner).
      */
-    GetCorner(cornerid: number): Vector;
+    GetCorner(cornerid: NavCorner): Vector;
     
     /**
      * [Server]
@@ -2214,7 +2214,7 @@ interface CNavArea {
      * If a [CNavArea](https://wiki.facepunch.com/gmod/CNavArea) has a two-way connection **to or from** this [CNavArea](https://wiki.facepunch.com/gmod/CNavArea) then it will not be returned from this function, use [CNavArea:GetAdjacentAreaDistances](https://wiki.facepunch.com/gmod/CNavArea:GetAdjacentAreaDistances) to get outgoing (one and two way) connections.
      * @param [dir = nil] - If set, will only return areas in the specified direction. See [Enums/NAVDIR](https://wiki.facepunch.com/gmod/Enums/NAVDIR).
      */
-    GetIncomingConnectionDistances(dir?: number): any;
+    GetIncomingConnectionDistances(dir?: NAVDIR): any;
     
     /**
      * [Server]
@@ -2276,7 +2276,7 @@ interface CNavArea {
      * Returns how this [CNavArea](https://wiki.facepunch.com/gmod/CNavArea) is connected to its parent.
      * 
      */
-    GetParentHow(): number;
+    GetParentHow(): NavTraverseType;
     
     /**
      * [Server]
@@ -2360,7 +2360,7 @@ interface CNavArea {
      * Returns true if the given [CNavArea](https://wiki.facepunch.com/gmod/CNavArea) has this attribute flag set.
      * @param attribs - Attribute mask to check for, see [Enums/NAV_MESH](https://wiki.facepunch.com/gmod/Enums/NAV_MESH)
      */
-    HasAttributes(attribs: number): boolean;
+    HasAttributes(attribs: NAV_MESH): boolean;
     
     /**
      * [Server]
@@ -2411,7 +2411,7 @@ interface CNavArea {
      * @param navArea - The [CNavArea](https://wiki.facepunch.com/gmod/CNavArea) to test against.
      * @param navDirType - The direction, in which to look for the connection. See [Enums/NavDir](https://wiki.facepunch.com/gmod/Enums/NavDir)
      */
-    IsConnectedAtSide(navArea: CNavArea, navDirType: number): boolean;
+    IsConnectedAtSide(navArea: CNavArea, navDirType: NavDir): boolean;
     
     /**
      * [Server]
@@ -2557,7 +2557,7 @@ interface CNavArea {
      * Drops a corner or all corners of a [CNavArea](https://wiki.facepunch.com/gmod/CNavArea) to the ground below it.
      * @param corner - The corner(s) to drop, uses [Enums/NavCorner](https://wiki.facepunch.com/gmod/Enums/NavCorner)
      */
-    PlaceOnGround(corner: number): void;
+    PlaceOnGround(corner: NavCorner): void;
     
     /**
      * [Server]
@@ -2585,7 +2585,7 @@ interface CNavArea {
      * Removes given attributes from given [CNavArea](https://wiki.facepunch.com/gmod/CNavArea). See also [CNavArea:SetAttributes](https://wiki.facepunch.com/gmod/CNavArea:SetAttributes).
      * @param attribs - The attributes to remove, as a bitflag. See [Enums/NAV_MESH](https://wiki.facepunch.com/gmod/Enums/NAV_MESH).
      */
-    RemoveAttributes(attribs: number): void;
+    RemoveAttributes(attribs: NAV_MESH): void;
     
     /**
      * [Server]
@@ -2608,7 +2608,7 @@ interface CNavArea {
      * Sets the attributes for given [CNavArea](https://wiki.facepunch.com/gmod/CNavArea). See [CNavArea:HasAttributes](https://wiki.facepunch.com/gmod/CNavArea:HasAttributes).
      * @param attribs - The attributes to set, as a bitflag. See [Enums/NAV_MESH](https://wiki.facepunch.com/gmod/Enums/NAV_MESH).
      */
-    SetAttributes(attribs: number): void;
+    SetAttributes(attribs: NAV_MESH): void;
     
     /**
      * [Server]
@@ -2617,7 +2617,7 @@ interface CNavArea {
      * @param corner - The corner to set, uses [Enums/NavCorner](https://wiki.facepunch.com/gmod/Enums/NavCorner)
      * @param position - The new position to set.
      */
-    SetCorner(corner: number, position: Vector): void;
+    SetCorner(corner: NavCorner, position: Vector): void;
     
     /**
      * [Server]
@@ -2638,7 +2638,7 @@ interface CNavArea {
      * @param parent - The new parent to set
      * @param how - How we get from parent to us using [Enums/NavTraverseType](https://wiki.facepunch.com/gmod/Enums/NavTraverseType)
      */
-    SetParent(parent: CNavArea, how: number): void;
+    SetParent(parent: CNavArea, how: NavTraverseType): void;
     
     /**
      * [Server]
@@ -2804,7 +2804,7 @@ interface CNavLadder {
      * @param navArea - The [CNavArea](https://wiki.facepunch.com/gmod/CNavArea) to test against.
      * @param navDirType - The direction, in which to look for the connection. See [Enums/NavDir](https://wiki.facepunch.com/gmod/Enums/NavDir)
      */
-    IsConnectedAtSide(navArea: CNavArea, navDirType: number): boolean;
+    IsConnectedAtSide(navArea: CNavArea, navDirType: NavDir): boolean;
     
     /**
      * [Server]
@@ -2884,7 +2884,7 @@ interface CNewParticleEffect {
      * @param [entAttachment = 0] - The attachment ID on the entity to attach the particle system to
      * @param [offset = Vector( 0, 0, 0 )] - The offset from the [Entity:GetPos](https://wiki.facepunch.com/gmod/Entity:GetPos) of the entity we are attaching this CP to.
      */
-    AddControlPoint(cpID: number, ent: Entity, partAttachment: number, entAttachment = 0, offset?: Vector): void;
+    AddControlPoint(cpID: number, ent: Entity, partAttachment: PATTACH, entAttachment = 0, offset?: Vector): void;
     
     /**
      * [Client]
@@ -3214,7 +3214,7 @@ interface ConVar {
      * Returns the [Enums/FCVAR](https://wiki.facepunch.com/gmod/Enums/FCVAR) flags of the ConVar
      * 
      */
-    GetFlags(): number;
+    GetFlags(): FCVAR;
     
     /**
      * [Shared and Menu]
@@ -3278,7 +3278,7 @@ interface ConVar {
      * Returns whether the specified flag is set on the [ConVar](https://wiki.facepunch.com/gmod/ConVar)
      * @param flag - The [Enums/FCVAR](https://wiki.facepunch.com/gmod/Enums/FCVAR) flag to test
      */
-    IsFlagSet(flag: number): boolean;
+    IsFlagSet(flag: FCVAR): boolean;
     
     /**
      * [Shared and Menu]
@@ -3548,7 +3548,7 @@ interface CSoundPatch {
      * Returns the current sound level.
      * 
      */
-    GetSoundLevel(): number;
+    GetSoundLevel(): SNDLVL;
     
     /**
      * [Shared]
@@ -3601,7 +3601,7 @@ interface CSoundPatch {
      * Sets the sound level in decibel.
      * @param level - The sound level in decibel. See [Enums/SNDLVL](https://wiki.facepunch.com/gmod/Enums/SNDLVL)
      */
-    SetSoundLevel(level: number): void;
+    SetSoundLevel(level: SNDLVL): void;
     
     /**
      * [Shared]
@@ -3726,7 +3726,7 @@ interface CTakeDamageInfo {
      * Consider using [CTakeDamageInfo:IsDamageType](https://wiki.facepunch.com/gmod/CTakeDamageInfo:IsDamageType) instead. Value returned by this function can contain multiple damage types.
      * 
      */
-    GetDamageType(): number;
+    GetDamageType(): DMG;
     
     /**
      * [Shared]
@@ -3772,7 +3772,7 @@ interface CTakeDamageInfo {
      * Returns whenever the damageinfo contains the damage type specified.
      * @param dmgType - Damage type to test. See [Enums/DMG](https://wiki.facepunch.com/gmod/Enums/DMG).
      */
-    IsDamageType(dmgType: number): boolean;
+    IsDamageType(dmgType: DMG): boolean;
     
     /**
      * [Shared]
@@ -3872,7 +3872,7 @@ interface CTakeDamageInfo {
      * Sets the damage type.
      * @param type - The damage type, see [Enums/DMG](https://wiki.facepunch.com/gmod/Enums/DMG).
      */
-    SetDamageType(type: number): void;
+    SetDamageType(type: DMG): void;
     
     /**
      * [Shared]
@@ -3926,7 +3926,7 @@ interface CUserCmd {
      * Adds a single key to the active buttons bitflag. See also [CUserCmd:SetButtons](https://wiki.facepunch.com/gmod/CUserCmd:SetButtons).
      * @param key - Key to add, see [Enums/IN](https://wiki.facepunch.com/gmod/Enums/IN).
      */
-    AddKey(key: number): void;
+    AddKey(key: IN): void;
     
     /**
      * [Shared]
@@ -3968,7 +3968,7 @@ interface CUserCmd {
      * Returns a bitflag indicating which buttons are pressed.
      * 
      */
-    GetButtons(): number;
+    GetButtons(): IN;
     
     /**
      * [Shared]
@@ -4050,7 +4050,7 @@ interface CUserCmd {
      * Returns true if the specified button(s) is pressed.
      * @param key - Bitflag representing which button to check, see [Enums/IN](https://wiki.facepunch.com/gmod/Enums/IN).
      */
-    KeyDown(key: number): boolean;
+    KeyDown(key: IN): boolean;
     
     /**
      * [Shared]
@@ -4060,7 +4060,7 @@ interface CUserCmd {
      * For movement you will want to use [CUserCmd:SetForwardMove](https://wiki.facepunch.com/gmod/CUserCmd:SetForwardMove), [CUserCmd:SetUpMove](https://wiki.facepunch.com/gmod/CUserCmd:SetUpMove) and [CUserCmd:SetSideMove](https://wiki.facepunch.com/gmod/CUserCmd:SetSideMove).
      * @param button - Bitflag to be removed from the key bitflag, see [Enums/IN](https://wiki.facepunch.com/gmod/Enums/IN).
      */
-    RemoveKey(button: number): void;
+    RemoveKey(button: IN): void;
     
     /**
      * [Shared]
@@ -4086,7 +4086,7 @@ interface CUserCmd {
      * 
      * @param buttons - Bitflag representing which buttons are "down", see [Enums/IN](https://wiki.facepunch.com/gmod/Enums/IN).
      */
-    SetButtons(buttons: number): void;
+    SetButtons(buttons: IN): void;
     
     /**
      * [Shared]
@@ -4244,7 +4244,7 @@ interface Entity {
      * See also [Entity:IsEffectActive](https://wiki.facepunch.com/gmod/Entity:IsEffectActive) and  [Entity:RemoveEffects](https://wiki.facepunch.com/gmod/Entity:RemoveEffects).
      * @param effect - The effect to apply, see [Enums/EF](https://wiki.facepunch.com/gmod/Enums/EF).
      */
-    AddEffects(effect: number): void;
+    AddEffects(effect: EF): void;
     
     /**
      * [Shared]
@@ -4252,7 +4252,7 @@ interface Entity {
      * Adds engine flags.
      * @param flag - Engine flag to add, see [Enums/EFL](https://wiki.facepunch.com/gmod/Enums/EFL)
      */
-    AddEFlags(flag: number): void;
+    AddEFlags(flag: EFL): void;
     
     /**
      * [Shared]
@@ -4260,7 +4260,7 @@ interface Entity {
      * Adds flags to the entity.
      * @param flag - Flag to add, see [Enums/FL](https://wiki.facepunch.com/gmod/Enums/FL)
      */
-    AddFlags(flag: number): void;
+    AddFlags(flag: FL): void;
     
     /**
      * [Server]
@@ -4275,7 +4275,7 @@ interface Entity {
      * @param activity - The activity to play as the gesture. See [Enums/ACT](https://wiki.facepunch.com/gmod/Enums/ACT).
      * @param [autokill = true] - 
      */
-    AddGesture(activity: number, autokill = true): number;
+    AddGesture(activity: ACT, autokill = true): number;
     
     /**
      * [Server]
@@ -4317,7 +4317,7 @@ interface Entity {
      * Adds solid flag(s) to the entity.
      * @param flags - The flag(s) to apply, see [Enums/FSOLID](https://wiki.facepunch.com/gmod/Enums/FSOLID).
      */
-    AddSolidFlags(flags: number): void;
+    AddSolidFlags(flags: FSOLID): void;
     
     /**
      * [Shared]
@@ -4402,7 +4402,7 @@ interface Entity {
      * @param boneID - Bone ID to test flag of.
      * @param flag - The flag to test, see [Enums/BONE](https://wiki.facepunch.com/gmod/Enums/BONE)
      */
-    BoneHasFlag(boneID: number, flag: number): boolean;
+    BoneHasFlag(boneID: number, flag: BONE): boolean;
     
     /**
      * [Shared]
@@ -4596,7 +4596,7 @@ interface Entity {
      * @param traceRes - Trace result to use to deal damage. See [Structures/TraceResult](https://wiki.facepunch.com/gmod/Structures/TraceResult)
      * @param [dir = traceRes.HitNormal] - Direction of the attack.
      */
-    DispatchTraceAttack(damageInfo: CTakeDamageInfo, traceRes: any, dir?: Vector): void;
+    DispatchTraceAttack(damageInfo: CTakeDamageInfo, traceRes: TraceResult, dir?: Vector): void;
     
     /**
      * [Server]
@@ -4709,7 +4709,7 @@ interface Entity {
      * @param [dsp = 0] - The DSP preset for this sound. [List of DSP presets](https://developer.valvesoftware.com/wiki/Dsp_presets)
      * @param [filter = nil] - If set serverside, the sound will only be networked to the clients in the filter.
      */
-    EmitSound(soundName: string, soundLevel = 75, pitchPercent = 100, volume = 1, channel?: number, soundFlags = 0, dsp = 0, filter?: CRecipientFilter): void;
+    EmitSound(soundName: string, soundLevel = 75, pitchPercent = 100, volume = 1, channel?: CHAN, soundFlags = 0, dsp = 0, filter?: CRecipientFilter): void;
     
     /**
      * [Server]
@@ -4853,7 +4853,7 @@ interface Entity {
      * @param bulletInfo - The bullet data to be used. See the [Structures/Bullet](https://wiki.facepunch.com/gmod/Structures/Bullet).
      * @param [suppressHostEvents = false] - Has the effect of encasing the FireBullets call in [Global.SuppressHostEvents](https://wiki.facepunch.com/gmod/Global.SuppressHostEvents), only works in multiplayer.
      */
-    FireBullets(bulletInfo: any, suppressHostEvents = false): void;
+    FireBullets(bulletInfo: Bullet, suppressHostEvents = false): void;
     
     /**
      * [Shared]
@@ -4983,7 +4983,7 @@ interface Entity {
      * 
      * @param attachmentId - The internal ID of the attachment.
      */
-    GetAttachment(attachmentId: number): any;
+    GetAttachment(attachmentId: number): AngPos;
     
     /**
      * [Shared]
@@ -4997,7 +4997,7 @@ interface Entity {
      * 
      * 
      */
-    GetAttachments(): any;
+    GetAttachments(): AttachmentData;
     
     /**
      * [Shared]
@@ -5013,7 +5013,7 @@ interface Entity {
      * Returns the blood color of this entity. This can be set with [Entity:SetBloodColor](https://wiki.facepunch.com/gmod/Entity:SetBloodColor).
      * 
      */
-    GetBloodColor(): number;
+    GetBloodColor(): BLOOD_COLOR;
     
     /**
      * [Shared]
@@ -5063,7 +5063,7 @@ interface Entity {
      * 
      * 
      */
-    GetBodyGroups(): any;
+    GetBodyGroups(): BodyGroupData;
     
     /**
      * [Shared]
@@ -5071,7 +5071,7 @@ interface Entity {
      * Returns the contents of the specified bone.
      * @param bone - The bone id, starting at index 0. See [Entity:LookupBone](https://wiki.facepunch.com/gmod/Entity:LookupBone).
      */
-    GetBoneContents(bone: number): number;
+    GetBoneContents(bone: number): CONTENTS;
     
     /**
      * [Shared]
@@ -5270,7 +5270,7 @@ interface Entity {
      * Returns the entity's collision group
      * 
      */
-    GetCollisionGroup(): number;
+    GetCollisionGroup(): COLLISION_GROUP;
     
     /**
      * [Shared]
@@ -5445,7 +5445,7 @@ interface Entity {
      * Returns a bit flag of all engine effect flags of the entity.
      * 
      */
-    GetEffects(): number;
+    GetEffects(): EF;
     
     /**
      * [Shared]
@@ -5453,7 +5453,7 @@ interface Entity {
      * Returns a bit flag of all engine flags of the entity.
      * 
      */
-    GetEFlags(): number;
+    GetEFlags(): EFL;
     
     /**
      * [Shared]
@@ -5469,7 +5469,7 @@ interface Entity {
      * Returns all flags of given entity.
      * 
      */
-    GetFlags(): number;
+    GetFlags(): FL;
     
     /**
      * [Shared]
@@ -5617,7 +5617,7 @@ interface Entity {
      * @param hitboxset - The number of the hit box set. This should be 0 in most cases.
      * Numbering for these sets start from 0. The total group count can be found with [Entity:GetHitBoxSetCount](https://wiki.facepunch.com/gmod/Entity:GetHitBoxSetCount).
      */
-    GetHitBoxHitGroup(hitbox: number, hitboxset: number): number;
+    GetHitBoxHitGroup(hitbox: number, hitboxset: number): HITGROUP;
     
     /**
      * [Shared]
@@ -5831,7 +5831,7 @@ interface Entity {
      * Returns the surface material of this entity.
      * 
      */
-    GetMaterialType(): number;
+    GetMaterialType(): MAT;
     
     /**
      * [Shared]
@@ -5874,7 +5874,7 @@ interface Entity {
      * Returns the contents of the entity's current model.
      * 
      */
-    GetModelContents(): number;
+    GetModelContents(): CONTENTS;
     
     /**
      * [Client]
@@ -5926,7 +5926,7 @@ interface Entity {
      * Returns the move collide type of the entity. The move collide is the way a physics object reacts to hitting an object - will it bounce, slide?
      * 
      */
-    GetMoveCollide(): number;
+    GetMoveCollide(): MOVECOLLIDE;
     
     /**
      * [Shared]
@@ -5944,7 +5944,7 @@ interface Entity {
      * Returns the entity's movetype
      * 
      */
-    GetMoveType(): number;
+    GetMoveType(): MOVETYPE;
     
     /**
      * [Server]
@@ -6627,7 +6627,7 @@ interface Entity {
      * Returns current render FX of the entity.
      * 
      */
-    GetRenderFX(): number;
+    GetRenderFX(): kRenderFx;
     
     /**
      * [Client]
@@ -6635,7 +6635,7 @@ interface Entity {
      * Returns the render group of the entity.
      * 
      */
-    GetRenderGroup(): number;
+    GetRenderGroup(): RENDERGROUP;
     
     /**
      * [Shared]
@@ -6643,7 +6643,7 @@ interface Entity {
      * Returns the render mode of the entity.
      * 
      */
-    GetRenderMode(): number;
+    GetRenderMode(): RENDERMODE;
     
     /**
      * [Client]
@@ -6738,7 +6738,7 @@ interface Entity {
      * Return activity id out of sequence id. Opposite of [Entity:SelectWeightedSequence](https://wiki.facepunch.com/gmod/Entity:SelectWeightedSequence).
      * @param seq - The sequence ID
      */
-    GetSequenceActivity(seq: number): number;
+    GetSequenceActivity(seq: number): ACT;
     
     /**
      * [Shared]
@@ -6746,7 +6746,7 @@ interface Entity {
      * Returns the activity name for the given sequence id.
      * @param sequenceId - The sequence id.
      */
-    GetSequenceActivityName(sequenceId: number): string;
+    GetSequenceActivityName(sequenceId: number): ACT;
     
     /**
      * [Shared]
@@ -6770,7 +6770,7 @@ interface Entity {
      * Returns a table of information about an entity's sequence.
      * @param sequenceId - The sequence id of the entity.
      */
-    GetSequenceInfo(sequenceId: number): any;
+    GetSequenceInfo(sequenceId: number): SequenceInfo;
     
     /**
      * [Shared]
@@ -6858,7 +6858,7 @@ interface Entity {
      * Returns solid type of an entity.
      * 
      */
-    GetSolid(): number;
+    GetSolid(): SOLID;
     
     /**
      * [Shared]
@@ -6866,7 +6866,7 @@ interface Entity {
      * Returns solid flag(s) of an entity.
      * 
      */
-    GetSolidFlags(): number;
+    GetSolidFlags(): FSOLID;
     
     /**
      * [Shared]
@@ -6934,7 +6934,7 @@ interface Entity {
      * 
      * 
      */
-    GetTouchTrace(): any;
+    GetTouchTrace(): TraceResult;
     
     /**
      * [Shared]
@@ -7084,7 +7084,7 @@ interface Entity {
      * Returns whether this entity has the specified spawnflags bits set.
      * @param spawnFlags - The spawnflag bits to check, see [Enums/SF](https://wiki.facepunch.com/gmod/Enums/SF).
      */
-    HasSpawnFlags(spawnFlags: number): boolean;
+    HasSpawnFlags(spawnFlags: SF): boolean;
     
     /**
      * [Server]
@@ -7205,7 +7205,7 @@ interface Entity {
      * Returns whether an entity has engine effect applied or not.
      * @param effect - The effect to check for, see [Enums/EF](https://wiki.facepunch.com/gmod/Enums/EF).
      */
-    IsEffectActive(effect: number): boolean;
+    IsEffectActive(effect: EF): boolean;
     
     /**
      * [Shared]
@@ -7213,7 +7213,7 @@ interface Entity {
      * Checks if given flag is set or not.
      * @param flag - The engine flag to test, see [Enums/EFL](https://wiki.facepunch.com/gmod/Enums/EFL)
      */
-    IsEFlagSet(flag: number): boolean;
+    IsEFlagSet(flag: EFL): boolean;
     
     /**
      * [Shared]
@@ -7221,7 +7221,7 @@ interface Entity {
      * Checks if given flag(s) is set or not.
      * @param flag - The engine flag(s) to test, see [Enums/FL](https://wiki.facepunch.com/gmod/Enums/FL)
      */
-    IsFlagSet(flag: number): boolean;
+    IsFlagSet(flag: FL): boolean;
     
     /**
      * [Server]
@@ -7331,7 +7331,7 @@ interface Entity {
      * 
      * @param activity - The activity to test. See [Enums/ACT](https://wiki.facepunch.com/gmod/Enums/ACT).
      */
-    IsPlayingGesture(activity: number): boolean;
+    IsPlayingGesture(activity: ACT): boolean;
     
     /**
      * [Shared]
@@ -7819,7 +7819,7 @@ interface Entity {
      * @param vertices - A table consisting of [Structures/MeshVertex](https://wiki.facepunch.com/gmod/Structures/MeshVertex) (only the `pos` element is taken into account). Every 3 vertices define a triangle in the physics mesh.
      * @param [surfaceprop = default] - Physical material from [surfaceproperties.txt](https://github.com/Facepunch/garrysmod/blob/master/garrysmod/scripts/surfaceproperties.txt) or added with [physenv.AddSurfaceData](https://wiki.facepunch.com/gmod/physenv.AddSurfaceData).
      */
-    PhysicsFromMesh(vertices: any, surfaceprop?: string): void;
+    PhysicsFromMesh(vertices: MeshVertex, surfaceprop?: string): void;
     
     /**
      * [Shared]
@@ -7843,7 +7843,7 @@ interface Entity {
      * >Using `SOLID_NONE` will only delete the current physics object - it does not create a new one.
      * 
      */
-    PhysicsInit(solidType: number): boolean;
+    PhysicsInit(solidType: SOLID): boolean;
     
     /**
      * [Shared]
@@ -7975,7 +7975,7 @@ interface Entity {
      * 
      * @param solidType - The solid type of the physics object to create, see [Enums/SOLID](https://wiki.facepunch.com/gmod/Enums/SOLID). Should be `SOLID_VPHYSICS` in most cases.
      */
-    PhysicsInitStatic(solidType: number): boolean;
+    PhysicsInitStatic(solidType: SOLID): boolean;
     
     /**
      * [Shared]
@@ -8089,7 +8089,7 @@ interface Entity {
      * Removes an engine effect applied to an entity.
      * @param effect - The effect to remove, see [Enums/EF](https://wiki.facepunch.com/gmod/Enums/EF).
      */
-    RemoveEffects(effect: number): void;
+    RemoveEffects(effect: EF): void;
     
     /**
      * [Shared]
@@ -8097,7 +8097,7 @@ interface Entity {
      * Removes specified engine flag
      * @param flag - The flag to remove, see [Enums/EFL](https://wiki.facepunch.com/gmod/Enums/EFL)
      */
-    RemoveEFlags(flag: number): void;
+    RemoveEFlags(flag: EFL): void;
     
     /**
      * [Shared]
@@ -8105,7 +8105,7 @@ interface Entity {
      * Removes specified flag(s) from the entity
      * @param flag - The flag(s) to remove, see [Enums/FL](https://wiki.facepunch.com/gmod/Enums/FL)
      */
-    RemoveFlags(flag: number): void;
+    RemoveFlags(flag: FL): void;
     
     /**
      * [Shared]
@@ -8131,7 +8131,7 @@ interface Entity {
      * 
      * @param activity - The activity remove. See [Enums/ACT](https://wiki.facepunch.com/gmod/Enums/ACT).
      */
-    RemoveGesture(activity: number): void;
+    RemoveGesture(activity: ACT): void;
     
     /**
      * [Server]
@@ -8149,7 +8149,7 @@ interface Entity {
      * Removes solid flag(s) from the entity.
      * @param flags - The flag(s) to remove, see [Enums/FSOLID](https://wiki.facepunch.com/gmod/Enums/FSOLID).
      */
-    RemoveSolidFlags(flags: number): void;
+    RemoveSolidFlags(flags: FSOLID): void;
     
     /**
      * [Shared]
@@ -8204,7 +8204,7 @@ interface Entity {
      * @param [addIfMissing = true] - Add/start the gesture to if it has not been yet started.
      * @param [autokill = true] - 
      */
-    RestartGesture(activity: number, addIfMissing = true, autokill = true): void;
+    RestartGesture(activity: ACT, addIfMissing = true, autokill = true): void;
     
     /**
      * [Shared]
@@ -8232,7 +8232,7 @@ interface Entity {
      * See also [Entity:SelectWeightedSequenceSeeded](https://wiki.facepunch.com/gmod/Entity:SelectWeightedSequenceSeeded).
      * @param act - The activity ID, see [Enums/ACT](https://wiki.facepunch.com/gmod/Enums/ACT).
      */
-    SelectWeightedSequence(act: number): number;
+    SelectWeightedSequence(act: ACT): number;
     
     /**
      * [Shared]
@@ -8243,7 +8243,7 @@ interface Entity {
      * @param act - The activity ID, see [Enums/ACT](https://wiki.facepunch.com/gmod/Enums/ACT).
      * @param seed - The seed to use for randomly selecting a sequence in the case the activity ID has multiple sequences bound to it. [Entity:SelectWeightedSequence](https://wiki.facepunch.com/gmod/Entity:SelectWeightedSequence) uses the same seed as [util.SharedRandom](https://wiki.facepunch.com/gmod/util.SharedRandom) internally for this.
      */
-    SelectWeightedSequenceSeeded(act: number, seed: number): number;
+    SelectWeightedSequenceSeeded(act: ACT, seed: number): number;
     
     /**
      * [Shared]
@@ -8329,7 +8329,7 @@ interface Entity {
      * Sets the blood color this entity uses.
      * @param bloodColor - An integer corresponding to [Enums/BLOOD_COLOR](https://wiki.facepunch.com/gmod/Enums/BLOOD_COLOR).
      */
-    SetBloodColor(bloodColor: number): void;
+    SetBloodColor(bloodColor: BLOOD_COLOR): void;
     
     /**
      * [Shared]
@@ -8432,7 +8432,7 @@ interface Entity {
      * Sets the entity's collision group.
      * @param group - Collision group of the entity, see [Enums/COLLISION_GROUP](https://wiki.facepunch.com/gmod/Enums/COLLISION_GROUP)
      */
-    SetCollisionGroup(group: number): void;
+    SetCollisionGroup(group: COLLISION_GROUP): void;
     
     /**
      * [Shared]
@@ -8974,7 +8974,7 @@ interface Entity {
      * Sets the move collide type of the entity. The move collide is the way a physics object reacts to hitting an object - will it bounce, slide?
      * @param moveCollideType - The move collide type, see [Enums/MOVECOLLIDE](https://wiki.facepunch.com/gmod/Enums/MOVECOLLIDE)
      */
-    SetMoveCollide(moveCollideType: number): void;
+    SetMoveCollide(moveCollideType: MOVECOLLIDE): void;
     
     /**
      * [Shared]
@@ -8996,7 +8996,7 @@ interface Entity {
      * Despite existing on client, it doesn't actually do anything on client.
      * @param movetype - The new movetype, see [Enums/MOVETYPE](https://wiki.facepunch.com/gmod/Enums/MOVETYPE)
      */
-    SetMoveType(movetype: number): void;
+    SetMoveType(movetype: MOVETYPE): void;
     
     /**
      * [Server]
@@ -10027,7 +10027,7 @@ interface Entity {
      * Sets entity's render FX.
      * @param renderFX - The new render FX to set, see [Enums/kRenderFx](https://wiki.facepunch.com/gmod/Enums/kRenderFx)
      */
-    SetRenderFX(renderFX: number): void;
+    SetRenderFX(renderFX: kRenderFx): void;
     
     /**
      * [Shared]
@@ -10035,7 +10035,7 @@ interface Entity {
      * Sets the render mode of the entity.
      * @param renderMode - New render mode to set, see [Enums/RENDERMODE](https://wiki.facepunch.com/gmod/Enums/RENDERMODE).
      */
-    SetRenderMode(renderMode: number): void;
+    SetRenderMode(renderMode: RENDERMODE): void;
     
     /**
      * [Client]
@@ -10115,7 +10115,7 @@ interface Entity {
      * Sets the solidity of an entity.
      * @param solid_type - The solid type. See the [Enums/SOLID](https://wiki.facepunch.com/gmod/Enums/SOLID).
      */
-    SetSolid(solid_type: number): void;
+    SetSolid(solid_type: SOLID): void;
     
     /**
      * [Shared]
@@ -10125,7 +10125,7 @@ interface Entity {
      * This overrides any other flags the entity might have had. See [Entity:AddSolidFlags](https://wiki.facepunch.com/gmod/Entity:AddSolidFlags) for adding flags.
      * @param flags - The flag(s) to set, see [Enums/FSOLID](https://wiki.facepunch.com/gmod/Enums/FSOLID).
      */
-    SetSolidFlags(flags: number): void;
+    SetSolidFlags(flags: FSOLID): void;
     
     /**
      * [Shared]
@@ -10177,7 +10177,7 @@ interface Entity {
      * 	See also [Entity:SetSurroundingBounds](https://wiki.facepunch.com/gmod/Entity:SetSurroundingBounds) (mutually exclusive).
      * @param bounds - Bounds type of the entity, see [Enums/BOUNDS](https://wiki.facepunch.com/gmod/Enums/BOUNDS)
      */
-    SetSurroundingBoundsType(bounds: number): void;
+    SetSurroundingBoundsType(bounds: BOUNDS): void;
     
     /**
      * [Shared]
@@ -10247,7 +10247,7 @@ interface Entity {
      * Sets the use type of an entity, affecting how often [ENTITY:Use](https://wiki.facepunch.com/gmod/ENTITY:Use) will be called for Lua entities.
      * @param useType - The use type to apply to the entity. Uses [Enums/_USE](https://wiki.facepunch.com/gmod/Enums/_USE).
      */
-    SetUseType(useType: number): void;
+    SetUseType(useType: _USE): void;
     
     /**
      * [Shared]
@@ -10535,7 +10535,7 @@ interface Entity {
      * @param [useType = USE_ON] - Use type, see [Enums/USE](https://wiki.facepunch.com/gmod/Enums/USE).
      * @param [value = 0] - Any value.
      */
-    Use(activator: Entity, caller?: Entity, useType?: number, value = 0): void;
+    Use(activator: Entity, caller?: Entity, useType?: USE, value = 0): void;
     
     /**
      * [Shared]
@@ -10640,7 +10640,7 @@ interface Entity {
      * @param act - Activity number. See [Enums/ACT](https://wiki.facepunch.com/gmod/Enums/ACT).
      * @param duration - How long the animation should take in seconds.
      */
-    Weapon_SetActivity(act: number, duration: number): void;
+    Weapon_SetActivity(act: ACT, duration: number): void;
     
     /**
      * [Shared]
@@ -10962,7 +10962,7 @@ interface IGModAudioChannel {
      * @param tbl - The table to output the DFT magnitudes (numbers between 0 and 1) into. Indices start from 1.
      * @param size - The number of samples to use. See [Enums/FFT](https://wiki.facepunch.com/gmod/Enums/FFT)
      */
-    FFT(tbl: any, size: number): number;
+    FFT(tbl: any, size: FFT): number;
     
     /**
      * [Client]
@@ -11078,7 +11078,7 @@ interface IGModAudioChannel {
      * Returns the state of a sound channel
      * 
      */
-    GetState(): number;
+    GetState(): GMOD_CHANNEL;
     
     /**
      * [Client]
@@ -11569,7 +11569,7 @@ interface IMesh {
      * 
      * @param vertexes - A table consisting of [Structures/MeshVertex](https://wiki.facepunch.com/gmod/Structures/MeshVertex)s.
      */
-    BuildFromTriangles(vertexes: any): void;
+    BuildFromTriangles(vertexes: MeshVertex): void;
     
     /**
      * [Client]
@@ -11928,7 +11928,7 @@ interface MarkupObject {
      * @param [alphaoverride = 255] - Sets the alpha of all drawn objects to this value.
      * @param [textAlign = TEXT_ALIGN_LEFT] - The alignment of the text horizontally using [Enums/TEXT_ALIGN](https://wiki.facepunch.com/gmod/Enums/TEXT_ALIGN)
      */
-    Draw(xOffset: number, yOffset: number, xAlign?: number, yAlign?: number, alphaoverride = 255, textAlign?: number): void;
+    Draw(xOffset: number, yOffset: number, xAlign?: TEXT_ALIGN, yAlign?: TEXT_ALIGN, alphaoverride = 255, textAlign?: TEXT_ALIGN): void;
     
     /**
      * [Client and Menu]
@@ -12087,7 +12087,7 @@ interface NextBot extends Entity, Entity {
      * Returns the solid mask for given NextBot.
      * 
      */
-    GetSolidMask(): number;
+    GetSolidMask(): CONTENTS;
     
     /**
      * [Server]
@@ -12159,7 +12159,7 @@ interface NextBot extends Entity, Entity {
      * The default solid mask of a NextBot is <page text="MASK_NPCSOLID">Enums/MASK</page>.
      * @param mask - The new mask, see [Enums/CONTENTS](https://wiki.facepunch.com/gmod/Enums/CONTENTS) and [Enums/MASK](https://wiki.facepunch.com/gmod/Enums/MASK)
      */
-    SetSolidMask(mask: number): void;
+    SetSolidMask(mask: CONTENTS): void;
     
     /**
      * [Server]
@@ -12167,7 +12167,7 @@ interface NextBot extends Entity, Entity {
      * Start doing an activity (animation)
      * @param activity - One of the [Enums/ACT](https://wiki.facepunch.com/gmod/Enums/ACT)
      */
-    StartActivity(activity: number): void;
+    StartActivity(activity: ACT): void;
 
 }
 
@@ -12189,7 +12189,7 @@ interface NPC extends Entity, Entity {
      * @param disposition - A [Enums/D](https://wiki.facepunch.com/gmod/Enums/D) representing the relationship type.
      * @param [priority = 0] - How strong the relationship is. Higher values mean higher priority over relationships with lower priority.
      */
-    AddEntityRelationship(target: Entity, disposition: number, priority = 0): void;
+    AddEntityRelationship(target: Entity, disposition: D, priority = 0): void;
     
     /**
      * [Server]
@@ -12202,7 +12202,7 @@ interface NPC extends Entity, Entity {
      * @param relationstring - A string representing how the relationship should be set up.
      * Should be formatted as `"npc_class `[Enums/D](https://wiki.facepunch.com/gmod/Enums/D)` numberPriority"`.
      */
-    AddRelationship(relationstring: string): void;
+    AddRelationship(relationstring: D): void;
     
     /**
      * [Server]
@@ -12235,7 +12235,7 @@ interface NPC extends Entity, Entity {
      * Adds a capability to the NPC.
      * @param capabilities - Capabilities to add, see [Enums/CAP](https://wiki.facepunch.com/gmod/Enums/CAP).
      */
-    CapabilitiesAdd(capabilities: number): void;
+    CapabilitiesAdd(capabilities: CAP): void;
     
     /**
      * [Server]
@@ -12251,7 +12251,7 @@ interface NPC extends Entity, Entity {
      * Returns the NPC's capabilities along the ones defined on its weapon.
      * 
      */
-    CapabilitiesGet(): number;
+    CapabilitiesGet(): CAP;
     
     /**
      * [Server]
@@ -12259,7 +12259,7 @@ interface NPC extends Entity, Entity {
      * Remove a certain capability.
      * @param capabilities - Capabilities to remove, see [Enums/CAP](https://wiki.facepunch.com/gmod/Enums/CAP)
      */
-    CapabilitiesRemove(capabilities: number): void;
+    CapabilitiesRemove(capabilities: CAP): void;
     
     /**
      * [Server]
@@ -12267,7 +12267,7 @@ interface NPC extends Entity, Entity {
      * Returns the NPC class. Do not confuse with [Entity:GetClass](https://wiki.facepunch.com/gmod/Entity:GetClass)!
      * 
      */
-    Classify(): number;
+    Classify(): CLASS;
     
     /**
      * [Server]
@@ -12283,7 +12283,7 @@ interface NPC extends Entity, Entity {
      * Clears out the specified [Enums/COND](https://wiki.facepunch.com/gmod/Enums/COND) on this NPC.
      * @param condition - The [Enums/COND](https://wiki.facepunch.com/gmod/Enums/COND) to clear out.
      */
-    ClearCondition(condition: number): void;
+    ClearCondition(condition: COND): void;
     
     /**
      * [Server]
@@ -12323,7 +12323,7 @@ interface NPC extends Entity, Entity {
      * Translates condition ID to a string.
      * @param cond - The NPCs condition ID, see [Enums/COND](https://wiki.facepunch.com/gmod/Enums/COND)
      */
-    ConditionName(cond: number): string;
+    ConditionName(cond: COND): string;
     
     /**
      * [Server]
@@ -12335,7 +12335,7 @@ interface NPC extends Entity, Entity {
      * 
      * @param ent - The entity to test our disposition towards.
      */
-    Disposition(ent: Entity): LuaMultiReturn<[number, number]>;
+    Disposition(ent: Entity): LuaMultiReturn<[D, number]>;
     
     /**
      * [Server]
@@ -12385,7 +12385,7 @@ interface NPC extends Entity, Entity {
      * Returns the NPC's current activity.
      * 
      */
-    GetActivity(): number;
+    GetActivity(): ACT;
     
     /**
      * [Server]
@@ -12401,7 +12401,7 @@ interface NPC extends Entity, Entity {
      * Returns the activity to be played when the NPC arrives at its goal
      * 
      */
-    GetArrivalActivity(): number;
+    GetArrivalActivity(): ACT;
     
     /**
      * [Server]
@@ -12457,7 +12457,7 @@ interface NPC extends Entity, Entity {
      * Returns the goal type for current navigation path.
      * 
      */
-    GetCurGoalType(): number;
+    GetCurGoalType(): GOALTYPE;
     
     /**
      * [Server]
@@ -12465,7 +12465,7 @@ interface NPC extends Entity, Entity {
      * Returns the NPC's current schedule.
      * 
      */
-    GetCurrentSchedule(): number;
+    GetCurrentSchedule(): SCHED;
     
     /**
      * [Server]
@@ -12473,7 +12473,7 @@ interface NPC extends Entity, Entity {
      * Returns how proficient (skilled) an NPC is with its current weapon.
      * 
      */
-    GetCurrentWeaponProficiency(): number;
+    GetCurrentWeaponProficiency(): WEAPON_PROFICIENCY;
     
     /**
      * [Server]
@@ -12561,7 +12561,7 @@ interface NPC extends Entity, Entity {
      * Returns NPCs hull type set by [NPC:SetHullType](https://wiki.facepunch.com/gmod/NPC:SetHullType).
      * 
      */
-    GetHullType(): number;
+    GetHullType(): HULL;
     
     /**
      * [Server]
@@ -12569,7 +12569,7 @@ interface NPC extends Entity, Entity {
      * Returns the ideal activity the NPC currently wants to achieve.
      * 
      */
-    GetIdealActivity(): number;
+    GetIdealActivity(): ACT;
     
     /**
      * [Server]
@@ -12669,7 +12669,7 @@ interface NPC extends Entity, Entity {
      * Returns the NPC's current movement activity.
      * 
      */
-    GetMovementActivity(): number;
+    GetMovementActivity(): ACT;
     
     /**
      * [Server]
@@ -12693,7 +12693,7 @@ interface NPC extends Entity, Entity {
      * Returns the NPC's navigation type.
      * 
      */
-    GetNavType(): number;
+    GetNavType(): NAV;
     
     /**
      * [Server]
@@ -12717,7 +12717,7 @@ interface NPC extends Entity, Entity {
      * Returns the NPC's state.
      * 
      */
-    GetNPCState(): number;
+    GetNPCState(): NPC_STATE;
     
     /**
      * [Server]
@@ -12781,7 +12781,7 @@ interface NPC extends Entity, Entity {
      * Returns the status of the current task.
      * 
      */
-    GetTaskStatus(): number;
+    GetTaskStatus(): TASKSTATUS;
     
     /**
      * [Server]
@@ -12829,7 +12829,7 @@ interface NPC extends Entity, Entity {
      * Returns whether or not the NPC has the given condition.
      * @param condition - The condition index, see [Enums/COND](https://wiki.facepunch.com/gmod/Enums/COND).
      */
-    HasCondition(condition: number): boolean;
+    HasCondition(condition: COND): boolean;
     
     /**
      * [Server]
@@ -12878,7 +12878,7 @@ interface NPC extends Entity, Entity {
      * Returns whether or not the NPC is performing the given schedule.
      * @param schedule - The schedule number, see [Enums/SCHED](https://wiki.facepunch.com/gmod/Enums/SCHED).
      */
-    IsCurrentSchedule(schedule: number): boolean;
+    IsCurrentSchedule(schedule: SCHED): boolean;
     
     /**
      * [Server]
@@ -12995,7 +12995,7 @@ interface NPC extends Entity, Entity {
      * @param yaw - The yaw angle.
      * @param left - Amount of climb nodes left?
      */
-    MoveClimbExec(destination: Vector, dir: Vector, distance: number, yaw: number, left: number): number;
+    MoveClimbExec(destination: Vector, dir: Vector, distance: number, yaw: number, left: number): AIMR;
     
     /**
      * [Server]
@@ -13028,7 +13028,7 @@ interface NPC extends Entity, Entity {
      * Related functions are [NPC:MoveJumpStart](https://wiki.facepunch.com/gmod/NPC:MoveJumpStart) and [NPC:MoveJumpStop](https://wiki.facepunch.com/gmod/NPC:MoveJumpStop).
      * 
      */
-    MoveJumpExec(): number;
+    MoveJumpExec(): AIMR;
     
     /**
      * [Server]
@@ -13048,7 +13048,7 @@ interface NPC extends Entity, Entity {
      * Related functions are [NPC:MoveJumpExec](https://wiki.facepunch.com/gmod/NPC:MoveJumpExec) and [NPC:MoveJumpStart](https://wiki.facepunch.com/gmod/NPC:MoveJumpStart).
      * 
      */
-    MoveJumpStop(): number;
+    MoveJumpStop(): AIMR;
     
     /**
      * [Server]
@@ -13172,7 +13172,7 @@ interface NPC extends Entity, Entity {
      * Removes conditions to ignore for the this NPC.
      * @param [conditions = nil] - Ignore conditions to remove, see [Enums/COND](https://wiki.facepunch.com/gmod/Enums/COND). If omitted, removes all ignore conditions.
      */
-    RemoveIgnoreConditions(conditions?: any): void;
+    RemoveIgnoreConditions(conditions?: COND): void;
     
     /**
      * [Server]
@@ -13180,7 +13180,7 @@ interface NPC extends Entity, Entity {
      * Resets the ideal activity of the NPC. See also [NPC:SetIdealActivity](https://wiki.facepunch.com/gmod/NPC:SetIdealActivity).
      * @param act - The new activity. See [Enums/ACT](https://wiki.facepunch.com/gmod/Enums/ACT).
      */
-    ResetIdealActivity(act: number): void;
+    ResetIdealActivity(act: ACT): void;
     
     /**
      * [Server]
@@ -13227,14 +13227,14 @@ interface NPC extends Entity, Entity {
      * Sets the NPC's current activity.
      * @param act - The new activity to set, see [Enums/ACT](https://wiki.facepunch.com/gmod/Enums/ACT).
      */
-    SetActivity(act: number): void;
+    SetActivity(act: ACT): void;
     
     /**
      * [Server]
      * 
      * @param act - See [Enums/ACT](https://wiki.facepunch.com/gmod/Enums/ACT).
      */
-    SetArrivalActivity(act: number): void;
+    SetArrivalActivity(act: ACT): void;
     
     /**
      * [Server]
@@ -13274,7 +13274,7 @@ interface NPC extends Entity, Entity {
      * Sets an NPC condition.
      * @param condition - The condition index, see [Enums/COND](https://wiki.facepunch.com/gmod/Enums/COND).
      */
-    SetCondition(condition: number): void;
+    SetCondition(condition: COND): void;
     
     /**
      * [Server]
@@ -13282,7 +13282,7 @@ interface NPC extends Entity, Entity {
      * Sets the weapon proficiency of an NPC (how skilled an NPC is with its current weapon).
      * @param proficiency - The proficiency for the NPC's current weapon. See [Enums/WEAPON_PROFICIENCY](https://wiki.facepunch.com/gmod/Enums/WEAPON_PROFICIENCY).
      */
-    SetCurrentWeaponProficiency(proficiency: number): void;
+    SetCurrentWeaponProficiency(proficiency: WEAPON_PROFICIENCY): void;
     
     /**
      * [Server]
@@ -13315,7 +13315,7 @@ interface NPC extends Entity, Entity {
      * Sets the hull type for the NPC.
      * @param hullType - Hull type. See [Enums/HULL](https://wiki.facepunch.com/gmod/Enums/HULL)
      */
-    SetHullType(hullType: number): void;
+    SetHullType(hullType: HULL): void;
     
     /**
      * [Server]
@@ -13323,7 +13323,7 @@ interface NPC extends Entity, Entity {
      * Sets the ideal activity the NPC currently wants to achieve. This is most useful for custom SNPCs.
      * @param __unnamedArg - The ideal activity to set. [Enums/ACT](https://wiki.facepunch.com/gmod/Enums/ACT).
      */
-    SetIdealActivity(__unnamedArg: number): void;
+    SetIdealActivity(__unnamedArg: ACT): void;
     
     /**
      * [Server]
@@ -13359,7 +13359,7 @@ interface NPC extends Entity, Entity {
      * @param conditions - Conditions to ignore, see [Enums/COND](https://wiki.facepunch.com/gmod/Enums/COND). The table must be sequential, numerical and values must correspond to condition enums.
      * @param size - Number of conditions to include in the ignored conditions table. Set this to the size of ignored conditions table to ignore all specified conditions.
      */
-    SetIgnoreConditions(conditions: any, size: number): void;
+    SetIgnoreConditions(conditions: COND, size: number): void;
     
     /**
      * [Server]
@@ -13403,7 +13403,7 @@ interface NPC extends Entity, Entity {
      * Sets the activity the NPC uses when it moves.
      * @param activity - The movement activity, see [Enums/ACT](https://wiki.facepunch.com/gmod/Enums/ACT).
      */
-    SetMovementActivity(activity: number): void;
+    SetMovementActivity(activity: ACT): void;
     
     /**
      * [Server]
@@ -13435,7 +13435,7 @@ interface NPC extends Entity, Entity {
      * Sets the navigation type of the NPC.
      * @param navtype - The new nav type. See [Enums/NAV](https://wiki.facepunch.com/gmod/Enums/NAV).
      */
-    SetNavType(navtype: number): void;
+    SetNavType(navtype: NAV): void;
     
     /**
      * [Server]
@@ -13443,7 +13443,7 @@ interface NPC extends Entity, Entity {
      * Sets the state the NPC is in to help it decide on a ideal schedule.
      * @param state - New NPC state, see [Enums/NPC_STATE](https://wiki.facepunch.com/gmod/Enums/NPC_STATE)
      */
-    SetNPCState(state: number): void;
+    SetNPCState(state: NPC_STATE): void;
     
     /**
      * [Server]
@@ -13451,7 +13451,7 @@ interface NPC extends Entity, Entity {
      * Sets the NPC's current schedule.
      * @param schedule - The NPC schedule, see [Enums/SCHED](https://wiki.facepunch.com/gmod/Enums/SCHED).
      */
-    SetSchedule(schedule: number): void;
+    SetSchedule(schedule: SCHED): void;
     
     /**
      * [Server]
@@ -13491,7 +13491,7 @@ interface NPC extends Entity, Entity {
      * Sets the status of the current task.
      * @param status - The status. See [Enums/TASKSTATUS](https://wiki.facepunch.com/gmod/Enums/TASKSTATUS).
      */
-    SetTaskStatus(status: number): void;
+    SetTaskStatus(status: TASKSTATUS): void;
     
     /**
      * [Server]
@@ -13770,7 +13770,7 @@ interface Panel {
      * <arg type="Panel" name="targetPanel">The panel object that was animated.</arg>
      * </callback>
      */
-    AlphaTo(alpha: number, duration: number, delay = 0, callback?: Function): void;
+    AlphaTo(alpha: number, duration: number, delay = 0, callback?: AnimationData): void;
     
     /**
      * [Client and Menu]
@@ -13885,7 +13885,7 @@ interface Panel {
      * <arg type="Panel" name="targetPanel">The panel object that was animated.</arg>
      * </callback>
      */
-    ColorTo(color: any, length: number, delay = 0, callback?: Function): void;
+    ColorTo(color: any, length: number, delay = 0, callback?: AnimationData): void;
     
     /**
      * [Client and Menu]
@@ -14048,7 +14048,7 @@ interface Panel {
      * 
      * @param dockType - Dock type using [Enums/DOCK](https://wiki.facepunch.com/gmod/Enums/DOCK).
      */
-    Dock(dockType: number): void;
+    Dock(dockType: DOCK): void;
     
     /**
      * [Client and Menu]
@@ -14376,7 +14376,7 @@ interface Panel {
      * Returns a dock enum for the panel's current docking type.
      * 
      */
-    GetDock(): number;
+    GetDock(): DOCK;
     
     /**
      * [Client and Menu]
@@ -14737,7 +14737,7 @@ interface Panel {
      * * `Top`: Dock at the top.
      * * `Fill`: Fill the parent panel.
      */
-    GWEN_SetDock(dockState: string): void;
+    GWEN_SetDock(dockState: DOCK): void;
     
     /**
      * [Client and Menu]
@@ -15247,7 +15247,7 @@ interface Panel {
      * <arg type="Panel" name="targetPanel">The panel object that was animated.</arg>
      * </callback>
      */
-    MoveBy(moveX: number, moveY: number, time: number, delay = 0, ease = -1, callback?: Function): void;
+    MoveBy(moveX: number, moveY: number, time: number, delay = 0, ease = -1, callback?: AnimationData): void;
     
     /**
      * [Client and Menu]
@@ -15286,7 +15286,7 @@ interface Panel {
      * <arg type="Panel" name="targetPanel">The panel object that was animated.</arg>
      * </callback>
      */
-    MoveTo(posX: number, posY: number, time: number, delay = 0, ease = -1, callback?: Function): void;
+    MoveTo(posX: number, posY: number, time: number, delay = 0, ease = -1, callback?: AnimationData): void;
     
     /**
      * [Client and Menu]
@@ -15348,7 +15348,7 @@ interface Panel {
      * <arg type="Panel" name="targetPanel">The panel object that was animated.</arg>
      * </callback>
      */
-    NewAnimation(length: number, delay = 0, ease = -1, callback?: Function): any;
+    NewAnimation(length: number, delay = 0, ease = -1, callback?: AnimationData): AnimationData;
     
     /**
      * [Client and Menu]
@@ -16476,7 +16476,7 @@ interface Panel {
      * <arg type="Panel" name="targetPanel">The panel object that was animated.</arg>
      * </callback>
      */
-    SizeTo(sizeW = 0, sizeH = 0, time: number, delay = 0, ease = -1, callback?: Function): void;
+    SizeTo(sizeW = 0, sizeH = 0, time: number, delay = 0, ease = -1, callback?: AnimationData): void;
     
     /**
      * [Client and Menu]
@@ -16732,7 +16732,7 @@ interface PathFollower {
      * Returns the first segment of the path.
      * 
      */
-    FirstSegment(): any;
+    FirstSegment(): PathSegment;
     
     /**
      * [Server]
@@ -16748,7 +16748,7 @@ interface PathFollower {
      * Returns all of the segments of the given path.
      * 
      */
-    GetAllSegments(): any;
+    GetAllSegments(): PathSegment;
     
     /**
      * [Server]
@@ -16764,7 +16764,7 @@ interface PathFollower {
      * Returns the current goal data. Can return nil if the current goal is invalid, for example immediately after [PathFollower:Update](https://wiki.facepunch.com/gmod/PathFollower:Update).
      * 
      */
-    GetCurrentGoal(): any;
+    GetCurrentGoal(): PathSegment;
     
     /**
      * [Server]
@@ -16859,7 +16859,7 @@ interface PathFollower {
      * Returns the last segment of the path.
      * 
      */
-    LastSegment(): any;
+    LastSegment(): PathSegment;
     
     /**
      * [Server]
@@ -16916,7 +16916,7 @@ interface PathFollower {
      * Returns the next segment of the path.
      * 
      */
-    NextSegment(): any;
+    NextSegment(): PathSegment;
     
     /**
      * [Server]
@@ -16924,7 +16924,7 @@ interface PathFollower {
      * Returns the previous segment of the path.
      * 
      */
-    PriorSegment(): any;
+    PriorSegment(): PathSegment;
     
     /**
      * [Server]
@@ -17026,7 +17026,7 @@ interface PhysObj {
      * Adds one or more bit flags.
      * @param flags - Bitflag, see [Enums/FVPHYSICS](https://wiki.facepunch.com/gmod/Enums/FVPHYSICS).
      */
-    AddGameFlag(flags: number): void;
+    AddGameFlag(flags: FVPHYSICS): void;
     
     /**
      * [Shared]
@@ -17110,7 +17110,7 @@ interface PhysObj {
      * Removes one of more specified flags.
      * @param flags - Bitflag, see [Enums/FVPHYSICS](https://wiki.facepunch.com/gmod/Enums/FVPHYSICS).
      */
-    ClearGameFlag(flags: number): void;
+    ClearGameFlag(flags: FVPHYSICS): void;
     
     /**
      * [Shared]
@@ -17118,7 +17118,7 @@ interface PhysObj {
      * Allows you to move a PhysObj to a point and angle in 3D space. Works with any PhysObj, not just physics shadows.
      * @param shadowparams - The parameters for the shadow. See [Structures/ShadowControlParams](https://wiki.facepunch.com/gmod/Structures/ShadowControlParams).
      */
-    ComputeShadowControl(shadowparams: any): void;
+    ComputeShadowControl(shadowparams: ShadowControlParams): void;
     
     /**
      * [Shared]
@@ -17190,7 +17190,7 @@ interface PhysObj {
      * Returns the contents flag of the [PhysObj](https://wiki.facepunch.com/gmod/PhysObj).
      * 
      */
-    GetContents(): number;
+    GetContents(): CONTENTS;
     
     /**
      * [Shared]
@@ -17278,7 +17278,7 @@ interface PhysObj {
      * Returns the physics mesh of the object which is used for physobj-on-physobj collision.
      * 
      */
-    GetMesh(): any;
+    GetMesh(): MeshVertex;
     
     /**
      * [Shared]
@@ -17286,7 +17286,7 @@ interface PhysObj {
      * Returns all convex physics meshes of the object. See [Entity:PhysicsInitMultiConvex](https://wiki.facepunch.com/gmod/Entity:PhysicsInitMultiConvex) for more information.
      * 
      */
-    GetMeshConvexes(): any;
+    GetMeshConvexes(): MeshVertex;
     
     /**
      * [Shared]
@@ -17390,7 +17390,7 @@ interface PhysObj {
      * Returns whenever the specified flag(s) is/are set.
      * @param flags - Bitflag, see [Enums/FVPHYSICS](https://wiki.facepunch.com/gmod/Enums/FVPHYSICS).
      */
-    HasGameFlag(flags: number): boolean;
+    HasGameFlag(flags: FVPHYSICS): boolean;
     
     /**
      * [Shared]
@@ -17558,7 +17558,7 @@ interface PhysObj {
      * Sets the contents flag of the [PhysObj](https://wiki.facepunch.com/gmod/PhysObj).
      * @param contents - The [Enums/CONTENTS](https://wiki.facepunch.com/gmod/Enums/CONTENTS).
      */
-    SetContents(contents: number): void;
+    SetContents(contents: CONTENTS): void;
     
     /**
      * [Shared]
@@ -17815,7 +17815,7 @@ interface Player extends Entity, Entity {
      * @param cycle - The cycle to start the animation at, ranges from 0 to 1.
      * @param [autokill = false] - If the animation should not loop. true = stops the animation, false = the animation keeps playing.
      */
-    AddVCDSequenceToGestureSlot(slot: number, sequenceId: number, cycle: number, autokill = false): void;
+    AddVCDSequenceToGestureSlot(slot: GESTURE_SLOT, sequenceId: number, cycle: number, autokill = false): void;
     
     /**
      * [Shared]
@@ -17847,7 +17847,7 @@ interface Player extends Entity, Entity {
      * Resets player gesture in selected slot.
      * @param slot - Slot to reset. See the [Enums/GESTURE_SLOT](https://wiki.facepunch.com/gmod/Enums/GESTURE_SLOT).
      */
-    AnimResetGestureSlot(slot: number): void;
+    AnimResetGestureSlot(slot: GESTURE_SLOT): void;
     
     /**
      * [Shared]
@@ -17861,7 +17861,7 @@ interface Player extends Entity, Entity {
      * @param activity - The activity ( see [Enums/ACT](https://wiki.facepunch.com/gmod/Enums/ACT) ) or sequence that should be played
      * @param [autokill = false] - Whether the animation should be automatically stopped. true = stops the animation, false = the animation keeps playing/looping
      */
-    AnimRestartGesture(slot: number, activity: number, autokill = false): void;
+    AnimRestartGesture(slot: GESTURE_SLOT, activity: ACT, autokill = false): void;
     
     /**
      * [Shared]
@@ -17878,7 +17878,7 @@ interface Player extends Entity, Entity {
      * @param slot - The gesture slot. See [Enums/GESTURE_SLOT](https://wiki.facepunch.com/gmod/Enums/GESTURE_SLOT)
      * @param sequenceID - Sequence ID to set.
      */
-    AnimSetGestureSequence(slot: number, sequenceID: number): void;
+    AnimSetGestureSequence(slot: GESTURE_SLOT, sequenceID: number): void;
     
     /**
      * [Shared]
@@ -17887,7 +17887,7 @@ interface Player extends Entity, Entity {
      * @param slot - The gesture slot. See [Enums/GESTURE_SLOT](https://wiki.facepunch.com/gmod/Enums/GESTURE_SLOT)
      * @param weight - The weight this slot should be set to. Value must be ranging from 0 to 1.
      */
-    AnimSetGestureWeight(slot: number, weight: number): void;
+    AnimSetGestureWeight(slot: GESTURE_SLOT, weight: number): void;
     
     /**
      * [Shared]
@@ -18073,7 +18073,7 @@ interface Player extends Entity, Entity {
      * @param event - The event to send. See [Enums/PLAYERANIMEVENT](https://wiki.facepunch.com/gmod/Enums/PLAYERANIMEVENT).
      * @param data - The data to send alongside the event.
      */
-    DoCustomAnimEvent(event: number, data: number): void;
+    DoCustomAnimEvent(event: PLAYERANIMEVENT, data: number): void;
     
     /**
      * [Shared]
@@ -18232,7 +18232,7 @@ interface Player extends Entity, Entity {
      * Returns the player's current activity.
      * 
      */
-    GetActivity(): number;
+    GetActivity(): ACT;
     
     /**
      * [Shared]
@@ -18418,7 +18418,7 @@ interface Player extends Entity, Entity {
      * See also [Player:GetEyeTraceNoCursor](https://wiki.facepunch.com/gmod/Player:GetEyeTraceNoCursor).
      * 
      */
-    GetEyeTrace(): any;
+    GetEyeTrace(): TraceResult;
     
     /**
      * [Shared]
@@ -18432,7 +18432,7 @@ interface Player extends Entity, Entity {
      * See also [Player:GetEyeTrace](https://wiki.facepunch.com/gmod/Player:GetEyeTrace).
      * 
      */
-    GetEyeTraceNoCursor(): any;
+    GetEyeTraceNoCursor(): TraceResult;
     
     /**
      * [Shared]
@@ -18580,7 +18580,7 @@ interface Player extends Entity, Entity {
      * Returns the the observer mode of the player
      * 
      */
-    GetObserverMode(): number;
+    GetObserverMode(): OBS_MODE;
     
     /**
      * [Shared]
@@ -19167,7 +19167,7 @@ interface Player extends Entity, Entity {
      * Returns whether a key is down. This is not networked to other players, meaning only the local client can see the keys they are pressing.
      * @param key - The key, see [Enums/IN](https://wiki.facepunch.com/gmod/Enums/IN)
      */
-    KeyDown(key: number): boolean;
+    KeyDown(key: IN): boolean;
     
     /**
      * [Shared]
@@ -19175,7 +19175,7 @@ interface Player extends Entity, Entity {
      * Gets whether a key was down one tick ago.
      * @param key - The key, see [Enums/IN](https://wiki.facepunch.com/gmod/Enums/IN)
      */
-    KeyDownLast(key: number): boolean;
+    KeyDownLast(key: IN): boolean;
     
     /**
      * [Shared]
@@ -19183,7 +19183,7 @@ interface Player extends Entity, Entity {
      * Gets whether a key was just pressed this tick.
      * @param key - Corresponds to an [Enums/IN](https://wiki.facepunch.com/gmod/Enums/IN). You can use [bit.bor](https://wiki.facepunch.com/gmod/bit.bor) here (see example 2)
      */
-    KeyPressed(key: number): boolean;
+    KeyPressed(key: IN): boolean;
     
     /**
      * [Shared]
@@ -19191,7 +19191,7 @@ interface Player extends Entity, Entity {
      * Gets whether a key was just released this tick.
      * @param key - The key, see [Enums/IN](https://wiki.facepunch.com/gmod/Enums/IN)
      */
-    KeyReleased(key: number): boolean;
+    KeyReleased(key: IN): boolean;
     
     /**
      * [Server]
@@ -19252,7 +19252,7 @@ interface Player extends Entity, Entity {
      * Returns the hitgroup where the player was last hit.
      * 
      */
-    LastHitGroup(): number;
+    LastHitGroup(): HITGROUP;
     
     /**
      * [Shared]
@@ -19399,7 +19399,7 @@ interface Player extends Entity, Entity {
      * @param type - Which type of message should be sent to the player ([Enums/HUD](https://wiki.facepunch.com/gmod/Enums/HUD)).
      * @param message - Message to be sent to the player.
      */
-    PrintMessage(type: number, message: string): void;
+    PrintMessage(type: HUD, message: string): void;
     
     /**
      * [Server]
@@ -19483,7 +19483,7 @@ interface Player extends Entity, Entity {
      * @param fadeHold - Fade effect hold time.
      * This is limited to 7 bits integer part and 9 bits fractional part.
      */
-    ScreenFade(flags: number, clr?: number, fadeTime: number, fadeHold: number): void;
+    ScreenFade(flags: SCREENFADE, clr?: number, fadeTime: number, fadeHold: number): void;
     
     /**
      * [Server]
@@ -19546,7 +19546,7 @@ interface Player extends Entity, Entity {
      * Sets the player's activity.
      * @param act - The new activity to set. See [Enums/ACT](https://wiki.facepunch.com/gmod/Enums/ACT).
      */
-    SetActivity(act: number): void;
+    SetActivity(act: ACT): void;
     
     /**
      * [Shared]
@@ -19807,7 +19807,7 @@ interface Player extends Entity, Entity {
      * Sets the hitgroup where the player was last hit.
      * @param hitgroup - The hitgroup to set as the "last hit", see [Enums/HITGROUP](https://wiki.facepunch.com/gmod/Enums/HITGROUP).
      */
-    SetLastHitGroup(hitgroup: number): void;
+    SetLastHitGroup(hitgroup: HITGROUP): void;
     
     /**
      * [Server]
@@ -19868,7 +19868,7 @@ interface Player extends Entity, Entity {
      * Sets the players observer mode. You must start the spectating first with [Player:Spectate](https://wiki.facepunch.com/gmod/Player:Spectate).
      * @param mode - Spectator mode using [Enums/OBS_MODE](https://wiki.facepunch.com/gmod/Enums/OBS_MODE).
      */
-    SetObserverMode(mode: number): void;
+    SetObserverMode(mode: OBS_MODE): void;
     
     /**
      * [Shared]
@@ -20136,7 +20136,7 @@ interface Player extends Entity, Entity {
      * Starts spectate mode for given player. This will also affect the players movetype in some cases.
      * @param mode - Spectate mode, see [Enums/OBS_MODE](https://wiki.facepunch.com/gmod/Enums/OBS_MODE).
      */
-    Spectate(mode: number): void;
+    Spectate(mode: OBS_MODE): void;
     
     /**
      * [Server]
@@ -20326,7 +20326,7 @@ interface Player extends Entity, Entity {
      * Returns 0 clientside when the game is not fully loaded.
      * 
      */
-    Team(): number;
+    Team(): TEAM;
     
     /**
      * [Server]
@@ -20357,7 +20357,7 @@ interface Player extends Entity, Entity {
      * @param damageForce - The force to be applied to the hit object.
      * @param damageAllNPCs - Whether to apply damage to all hit NPCs or not.
      */
-    TraceHullAttack(startPos: Vector, endPos: Vector, mins: Vector, maxs: Vector, damage: number, damageFlags: number, damageForce: number, damageAllNPCs: boolean): Entity;
+    TraceHullAttack(startPos: Vector, endPos: Vector, mins: Vector, maxs: Vector, damage: number, damageFlags: DMG, damageForce: number, damageAllNPCs: boolean): Entity;
     
     /**
      * [Shared]
@@ -20365,7 +20365,7 @@ interface Player extends Entity, Entity {
      * Translates [Enums/ACT](https://wiki.facepunch.com/gmod/Enums/ACT) according to the holdtype of players currently held weapon.
      * @param act - The initial [Enums/ACT](https://wiki.facepunch.com/gmod/Enums/ACT)
      */
-    TranslateWeaponActivity(act: number): number;
+    TranslateWeaponActivity(act: ACT): ACT;
     
     /**
      * [Shared]
@@ -21886,7 +21886,7 @@ interface Vector {
      * 
      * 
      */
-    ToScreen(): any;
+    ToScreen(): ToScreenData;
     
     /**
      * [Shared and Menu]
@@ -22002,7 +22002,7 @@ interface Vehicle extends Entity, Entity {
      * Returns some info about the vehicle.
      * 
      */
-    GetOperatingParams(): any;
+    GetOperatingParams(): OperatingParams;
     
     /**
      * [Shared]
@@ -22082,7 +22082,7 @@ interface Vehicle extends Entity, Entity {
      * Returns the vehicle parameters of given vehicle.
      * 
      */
-    GetVehicleParams(): any;
+    GetVehicleParams(): VehicleParams;
     
     /**
      * [Shared]
@@ -22317,7 +22317,7 @@ interface Vehicle extends Entity, Entity {
      * 
      * @param params - The new new vehicle parameters. See [Structures/VehicleParams](https://wiki.facepunch.com/gmod/Structures/VehicleParams).
      */
-    SetVehicleParams(params: any): void;
+    SetVehicleParams(params: VehicleParams): void;
     
     /**
      * [Server]
@@ -22783,7 +22783,7 @@ interface Weapon extends Entity, Entity {
      * 
      * @param act - Sequence to use as reload animation. Uses the [Enums/ACT](https://wiki.facepunch.com/gmod/Enums/ACT).
      */
-    DefaultReload(act: number): boolean;
+    DefaultReload(act: ACT): boolean;
     
     /**
      * [Shared]
@@ -22795,7 +22795,7 @@ interface Weapon extends Entity, Entity {
      * 
      * 
      */
-    GetActivity(): number;
+    GetActivity(): ACT;
     
     /**
      * [Shared]
@@ -22970,7 +22970,7 @@ interface Weapon extends Entity, Entity {
      * Forces weapon to play activity/animation.
      * @param act - Activity to play. See the [Enums/ACT](https://wiki.facepunch.com/gmod/Enums/ACT) (specifically `ACT_VM_`).
      */
-    SendWeaponAnim(act: number): void;
+    SendWeaponAnim(act: ACT): void;
     
     /**
      * [Shared]
@@ -22980,7 +22980,7 @@ interface Weapon extends Entity, Entity {
      * See also [Weapon:GetActivity](https://wiki.facepunch.com/gmod/Weapon:GetActivity).
      * @param act - The new activity to set, see [Enums/ACT](https://wiki.facepunch.com/gmod/Enums/ACT).
      */
-    SetActivity(act: number): void;
+    SetActivity(act: ACT): void;
     
     /**
      * [Shared]
@@ -23850,7 +23850,7 @@ interface DBinder extends DButton {
      * Gets the code of the key currently bound by the DBinder. Same as [DBinder:GetValue](https://wiki.facepunch.com/gmod/DBinder:GetValue). An [Global.AccessorFunc](https://wiki.facepunch.com/gmod/Global.AccessorFunc)
      * 
      */
-    GetSelectedNumber(): number;
+    GetSelectedNumber(): KEY;
     
     /**
      * [Client]
@@ -23858,7 +23858,7 @@ interface DBinder extends DButton {
      * Gets the code of the key currently bound by the DBinder. Same as [DBinder:GetSelectedNumber](https://wiki.facepunch.com/gmod/DBinder:GetSelectedNumber).
      * 
      */
-    GetValue(): number;
+    GetValue(): KEY;
     
     /**
      * [Client]
@@ -23874,7 +23874,7 @@ interface DBinder extends DButton {
      * Sets the current key bound by the [DBinder](https://wiki.facepunch.com/gmod/DBinder), and updates the button's text as well as the [ConVar](https://wiki.facepunch.com/gmod/ConVar).
      * @param keyCode - The key code of the key to bind. See [Enums/KEY](https://wiki.facepunch.com/gmod/Enums/KEY).
      */
-    SetSelectedNumber(keyCode: number): void;
+    SetSelectedNumber(keyCode: KEY): void;
     
     /**
      * [Client]
@@ -23882,7 +23882,7 @@ interface DBinder extends DButton {
      * Alias of [DBinder:SetSelectedNumber](https://wiki.facepunch.com/gmod/DBinder:SetSelectedNumber).
      * @param keyCode - The key code of the key to bind. See [Enums/KEY](https://wiki.facepunch.com/gmod/Enums/KEY).
      */
-    SetValue(keyCode: number): void;
+    SetValue(keyCode: KEY): void;
     
     /**
      * [Client]
@@ -27306,7 +27306,7 @@ interface DIconLayout extends DDragBase {
      * Currently only TOP and LEFT are supported.
      * @param direction - [Enums/DOCK](https://wiki.facepunch.com/gmod/Enums/DOCK)
      */
-    SetLayoutDir(direction: number): void;
+    SetLayoutDir(direction: DOCK): void;
     
     /**
      * [Client and Menu]
@@ -29789,7 +29789,7 @@ interface DModelPanel extends DButton {
      * @param direction - The light direction, see [Enums/BOX](https://wiki.facepunch.com/gmod/Enums/BOX).
      * @param color - The color of the directional lighting.
      */
-    SetDirectionalLight(direction: number, color: any): void;
+    SetDirectionalLight(direction: BOX, color: any): void;
     
     /**
      * [Client]
@@ -32258,7 +32258,7 @@ interface DTextEntry extends TextEntry {
      * Called from [DTextEntry](https://wiki.facepunch.com/gmod/DTextEntry)'s [TextEntry:OnKeyCodeTyped](https://wiki.facepunch.com/gmod/TextEntry:OnKeyCodeTyped) override whenever a valid character is typed while the text entry is focused.
      * @param keyCode - They key code of the key pressed, see [Enums/KEY](https://wiki.facepunch.com/gmod/Enums/KEY).
      */
-    OnKeyCode(keyCode: number): void;
+    OnKeyCode(keyCode: KEY): void;
     
     /**
      * [Client and Menu]
@@ -34607,7 +34607,7 @@ interface TextEntry extends Panel {
      * Used internally for functionality of [DTextEntry](https://wiki.facepunch.com/gmod/DTextEntry)
      * @param keyCode - They key code of the key pressed, see [Enums/KEY](https://wiki.facepunch.com/gmod/Enums/KEY).
      */
-    OnKeyCodeTyped(keyCode: number): boolean;
+    OnKeyCodeTyped(keyCode: KEY): boolean;
     
     /**
      * [Client and Menu]
@@ -55395,7 +55395,7 @@ declare enum WEAPON_PROFICIENCY {
  * @param name - The name of the functions (will be prefixed with Get and Set).
  * @param [force = nil] - The type the setter should force to (uses [Enums/FORCE](https://wiki.facepunch.com/gmod/Enums/FORCE)).
  */
-declare function AccessorFunc(tab: any, key: any, name: string, force?: number): void;
+declare function AccessorFunc(tab: any, key: any, name: string, force?: FORCE): void;
 
 /**
  * [Shared and Menu]
@@ -55421,7 +55421,7 @@ declare function AddBackgroundImage(path: string): void;
  * @param helpText - The help text.
  * @param flags - Concommand flags using [Enums/FCVAR](https://wiki.facepunch.com/gmod/Enums/FCVAR)
  */
-declare function AddConsoleCommand(name: string, helpText: string, flags: number): void;
+declare function AddConsoleCommand(name: string, helpText: string, flags: FCVAR): void;
 
 /**
  * [Shared]
@@ -55652,7 +55652,7 @@ declare function ClearProblem(id: string): void;
  * @param model - The file path to the model.
  * @param [renderGroup = RENDERGROUP_OTHER] - The render group of the entity for the clientside leaf system, see [Enums/RENDERGROUP](https://wiki.facepunch.com/gmod/Enums/RENDERGROUP).
  */
-declare function ClientsideModel(model: string, renderGroup?: number): CSEnt;
+declare function ClientsideModel(model: string, renderGroup?: RENDERGROUP): CSEnt;
 
 /**
  * [Client]
@@ -55670,7 +55670,7 @@ declare function ClientsideModel(model: string, renderGroup?: number): CSEnt;
  * @param model - The file path to the model.
  * @param [renderGroup = RENDERGROUP_OPAQUE] - The [Enums/RENDERGROUP](https://wiki.facepunch.com/gmod/Enums/RENDERGROUP) to assign.
  */
-declare function ClientsideRagdoll(model: string, renderGroup?: number): CSEnt;
+declare function ClientsideRagdoll(model: string, renderGroup?: RENDERGROUP): CSEnt;
 
 /**
  * [Client]
@@ -55823,7 +55823,7 @@ declare function CreateContextMenu(): void;
  * @param [min = nil] - If set, the ConVar cannot be changed to a number lower than this value.
  * @param [max = nil] - If set, the ConVar cannot be changed to a number higher than this value.
  */
-declare function CreateConVar(name: string, value: string, flags?: number, helptext?: string, min?: number, max?: number): ConVar;
+declare function CreateConVar(name: string, value: string, flags?: FCVAR, helptext?: string, min?: number, max?: number): ConVar;
 
 /**
  * [Client and Menu]
@@ -55857,7 +55857,7 @@ declare function CreateMaterial(name: string, shaderName: string, materialData: 
  * @param data - A JSON string containing all necessary information.
  * 			JSON structue should be [Structures/Preset](https://wiki.facepunch.com/gmod/Structures/Preset)
  */
-declare function CreateNewAddonPreset(data: string): void;
+declare function CreateNewAddonPreset(data: Preset): void;
 
 /**
  * [Client]
@@ -55873,7 +55873,7 @@ declare function CreateNewAddonPreset(data: string): void;
  * @param [entAttachment = 0] - The attachment ID on the entity to attach the particle system to
  * @param [offset = Vector( 0, 0, 0 )] - The offset from the [Entity:GetPos](https://wiki.facepunch.com/gmod/Entity:GetPos) of the entity we are attaching this CP to.
  */
-declare function CreateParticleSystem(ent: Entity, effect: string, partAttachment: number, entAttachment = 0, offset?: Vector): CNewParticleEffect;
+declare function CreateParticleSystem(ent: Entity, effect: string, partAttachment: PATTACH, entAttachment = 0, offset?: Vector): CNewParticleEffect;
 
 /**
  * [Client]
@@ -56343,7 +56343,7 @@ declare function DTVar_ReceiveProxyGL(entity: Entity, Type: string, index: numbe
  * @param index - An unsigned Integer. Usually an <page text="entity index">Entity:EntIndex</page> is used here.
  * @param [elight = false] - Allocates an elight instead of a dlight. Elights have a higher light limit and do not light the world (making the "noworld" parameter have no effect).
  */
-declare function DynamicLight(index: number, elight = false): any;
+declare function DynamicLight(index: number, elight = false): DynamicLight;
 
 /**
  * [Menu]
@@ -56422,7 +56422,7 @@ declare function Either(condition: any, truevar: any, falsevar: any): any;
  * @param [soundFlags = 0] - The flags of the sound, see [Enums/SND](https://wiki.facepunch.com/gmod/Enums/SND)
  * @param [pitch = 100] - The pitch of the sound, 0-255
  */
-declare function EmitSentence(soundName: string, position: Vector, entity: number, channel?: number, volume = 1, soundLevel = 75, soundFlags = 0, pitch = 100): void;
+declare function EmitSentence(soundName: string, position: Vector, entity: number, channel?: CHAN, volume = 1, soundLevel = 75, soundFlags = 0, pitch = 100): void;
 
 /**
  * [Shared]
@@ -56450,7 +56450,7 @@ declare function EmitSentence(soundName: string, position: Vector, entity: numbe
  * @param [dsp = 0] - The DSP preset for this sound. [List of DSP presets](https://developer.valvesoftware.com/wiki/Dsp_presets)
  * @param [filter = nil] - If set serverside, the sound will only be networked to the clients in the filter.
  */
-declare function EmitSound(soundName: string, position: Vector, entity = 0, channel?: number, volume = 1, soundLevel = 75, soundFlags = 0, pitch = 100, dsp = 0, filter?: CRecipientFilter): void;
+declare function EmitSound(soundName: string, position: Vector, entity = 0, channel?: CHAN, volume = 1, soundLevel = 75, soundFlags = 0, pitch = 100, dsp = 0, filter?: CRecipientFilter): void;
 
 /**
  * [Client and Menu]
@@ -57120,7 +57120,7 @@ declare function GetRenderTarget(name: string, width: number, height: number): I
  * >Some additional image formats are accepted, but don't have enums. See [VTF Enumerations.](https://developer.valvesoftware.com/wiki/Valve_Texture_Format#VTF_enumerations)
  * 
  */
-declare function GetRenderTargetEx(name: string, width: number, height: number, sizeMode: number, depthMode: number, textureFlags: number, rtFlags: number, imageFormat: number): ITexture;
+declare function GetRenderTargetEx(name: string, width: number, height: number, sizeMode: RT_SIZE, depthMode: MATERIAL_RT_DEPTH, textureFlags: TEXTUREFLAGS, rtFlags: CREATERENDERTARGETFLAGS, imageFormat: IMAGE_FORMAT): ITexture;
 
 /**
  * [Menu]
@@ -57208,7 +57208,7 @@ declare function HSVToColor(hue: number, saturation: number, value: number): Col
  * 
  * @param parameters - The request parameters. See [Structures/HTTPRequest](https://wiki.facepunch.com/gmod/Structures/HTTPRequest).
  */
-declare function HTTP(parameters: any): boolean;
+declare function HTTP(parameters: HTTPRequest): boolean;
 
 /**
  * [Shared and Menu]
@@ -57979,7 +57979,7 @@ declare function ParticleEffect(particleName: string, position: Vector, angles: 
  * @param entity - The entity to be used in the way specified by the attachType.
  * @param attachmentID - The id of the attachment to be used in the way specified by the attachType.
  */
-declare function ParticleEffectAttach(particleName: string, attachType: number, entity: Entity, attachmentID: number): void;
+declare function ParticleEffectAttach(particleName: string, attachType: PATTACH, entity: Entity, attachmentID: number): void;
 
 /**
  * [Client]
@@ -58107,7 +58107,7 @@ declare function print(...args: any[]): void;
  * @param type - Which type of message should be sent to the players (see [Enums/HUD](https://wiki.facepunch.com/gmod/Enums/HUD))
  * @param message - Message to be sent to the players
  */
-declare function PrintMessage(type: number, message: string): void;
+declare function PrintMessage(type: HUD, message: string): void;
 
 /**
  * [Shared and Menu]
@@ -59111,7 +59111,7 @@ declare function type(var_: any): string;
  * 
  * @param variable - The variable to get the type ID of.
  */
-declare function TypeID(variable: any): number;
+declare function TypeID(variable: any): TYPE;
 
 /**
  * [Shared and Menu]
@@ -59478,7 +59478,7 @@ declare namespace ai {
      * Translates a schedule name to its corresponding ID.
      * @param sched - Then schedule name. In most cases, this will be the same as the [Enums/SCHED](https://wiki.facepunch.com/gmod/Enums/SCHED) name.
      */
-    function GetScheduleID(sched: string): number;
+    function GetScheduleID(sched: SCHED): SCHED;
     
     /**
      * [Server]
@@ -59833,7 +59833,7 @@ declare namespace cam {
      * 
      * @param dataTbl - Render context config. See [Structures/RenderCamData](https://wiki.facepunch.com/gmod/Structures/RenderCamData)
      */
-    function Start(dataTbl: any): void;
+    function Start(dataTbl: RenderCamData): void;
     
     /**
      * [Client]
@@ -60464,7 +60464,7 @@ declare namespace constraint {
      * @param [toggle = true] - Whether the hydraulic should be a toggle, not a "hold key to extend" action.
      * @param [color = color_white] - The color of the rope. See [Global.Color](https://wiki.facepunch.com/gmod/Global.Color).
      */
-    function Hydraulic(player: Player, ent1: Entity, ent2: Entity, bone1: number, bone2: number, localPos1: Vector, localPos2: Vector, length1: number, length2: number, width: number, key: number, slider: number, speed: number, material?: string, toggle = true, color?: any): LuaMultiReturn<[Entity, Entity, Entity, Entity]>;
+    function Hydraulic(player: Player, ent1: Entity, ent2: Entity, bone1: number, bone2: number, localPos1: Vector, localPos2: Vector, length1: number, length2: number, width: number, key: KEY, slider: number, speed: number, material?: string, toggle = true, color?: any): LuaMultiReturn<[Entity, Entity, Entity, Entity]>;
     
     /**
      * [Server]
@@ -60502,7 +60502,7 @@ declare namespace constraint {
      * @param [localAxis = nil] - Overrides axis of rotation?
      * <validate></validate>
      */
-    function Motor(ent1: Entity, ent2: Entity, bone1: number, bone2: number, localPos1: Vector, localPos2: Vector, friction: number, torque: number, forcetime: number, nocollide = 0, toggle = false, player?: Player, forcelimit = 0, key_fwd?: number, key_bwd?: number, direction = 1, localAxis?: Vector): LuaMultiReturn<[Entity, Entity]>;
+    function Motor(ent1: Entity, ent2: Entity, bone1: number, bone2: number, localPos1: Vector, localPos2: Vector, friction: number, torque: number, forcetime: number, nocollide = 0, toggle = false, player?: Player, forcelimit = 0, key_fwd?: KEY, key_bwd?: KEY, direction = 1, localAxis?: Vector): LuaMultiReturn<[Entity, Entity]>;
     
     /**
      * [Server]
@@ -60530,7 +60530,7 @@ declare namespace constraint {
      * @param [material = ] - Material of the rope. If left unset, will be solid black.
      * @param [color = color_white] - The color of the rope. See [Global.Color](https://wiki.facepunch.com/gmod/Global.Color).
      */
-    function Muscle(player: Player, ent1: Entity, ent2: Entity, bone1: number, bone2: number, localPos1: Vector, localPos2: Vector, length1: number, length2: number, width: number, key: number, fixed: number, period: number, amplitude: number, startOn = false, material?: string, color?: any): LuaMultiReturn<[Entity, Entity, Entity, Entity]>;
+    function Muscle(player: Player, ent1: Entity, ent2: Entity, bone1: number, bone2: number, localPos1: Vector, localPos2: Vector, length1: number, length2: number, width: number, key: KEY, fixed: number, period: number, amplitude: number, startOn = false, material?: string, color?: any): LuaMultiReturn<[Entity, Entity, Entity, Entity]>;
     
     /**
      * [Server]
@@ -60676,7 +60676,7 @@ declare namespace constraint {
      * @param [toggle = false] - Whether the winch should be on toggle.
      * @param [color = color_white] - The color of the rope. See [Global.Color](https://wiki.facepunch.com/gmod/Global.Color).
      */
-    function Winch(player: Player, ent1: Entity, ent2: Entity, bone1: number, bone2: number, localPos1: Vector, localPos2: Vector, width: number, fwdBind: number, bwdBind: number, fwdSpeed: number, bwdSpeed: number, material?: string, toggle = false, color?: any): LuaMultiReturn<[Entity, Entity, Entity]>;
+    function Winch(player: Player, ent1: Entity, ent2: Entity, bone1: number, bone2: number, localPos1: Vector, localPos2: Vector, width: number, fwdBind: KEY, bwdBind: KEY, fwdSpeed: number, bwdSpeed: number, material?: string, toggle = false, color?: any): LuaMultiReturn<[Entity, Entity, Entity]>;
 
 }
 
@@ -60706,7 +60706,7 @@ declare namespace construct {
      * @param [aVel = Angle( 0, 0, 0 )] - Angular velocity to set on spawn
      * @param [frozen = false] - Freeze the magnet on start
      */
-    function Magnet(ply: Player, pos: Vector, ang: Angle, model: string, material: string, key: number, maxObjects: number, strength: number, nopull = 0, allowrot = 0, startOn = 0, toggle: number, vel?: Vector, aVel?: Angle, frozen = false): Entity;
+    function Magnet(ply: Player, pos: Vector, ang: Angle, model: string, material: string, key: KEY, maxObjects: number, strength: number, nopull = 0, allowrot = 0, startOn = 0, toggle: number, vel?: Vector, aVel?: Angle, frozen = false): Entity;
     
     /**
      * [Server]
@@ -60718,7 +60718,7 @@ declare namespace construct {
      * @param physObj - The physics object to apply the properties to
      * @param data - The table containing properties to apply. See [Structures/PhysProperties](https://wiki.facepunch.com/gmod/Structures/PhysProperties)
      */
-    function SetPhysProp(ply: Player, ent: Entity, physObjID: number, physObj: PhysObj, data: any): void;
+    function SetPhysProp(ply: Player, ent: Entity, physObjID: number, physObj: PhysObj, data: PhysProperties): void;
 
 }
 
@@ -61034,7 +61034,7 @@ declare namespace debug {
      * * `>` - Causes this function to use the last argument to get the data from
      * @param function_ - Function to use. (Only used by the `>` field)
      */
-    function getinfo(funcOrStackLevel: Function, fields?: string, function_: Function): any;
+    function getinfo(funcOrStackLevel: Function, fields?: string, function_: Function): DebugInfo;
     
     /**
      * [Shared and Menu]
@@ -61686,7 +61686,7 @@ declare namespace draw {
      * @param [color = Color( 255, 255, 255, 255 )] - Color to draw the text in. Uses the [Color](https://wiki.facepunch.com/gmod/Color).
      * @param [xAlign = TEXT_ALIGN_LEFT] - Where to align the text horizontally. Uses the [Enums/TEXT_ALIGN](https://wiki.facepunch.com/gmod/Enums/TEXT_ALIGN).
      */
-    function DrawText(text: string, font?: string, x = 0, y = 0, color?: Color, xAlign?: number): void;
+    function DrawText(text: string, font?: string, x = 0, y = 0, color?: Color, xAlign?: TEXT_ALIGN): void;
     
     /**
      * [Client and Menu]
@@ -61769,7 +61769,7 @@ declare namespace draw {
      * @param [xAlign = TEXT_ALIGN_LEFT] - The alignment of the X coordinate using [Enums/TEXT_ALIGN](https://wiki.facepunch.com/gmod/Enums/TEXT_ALIGN).
      * @param [yAlign = TEXT_ALIGN_TOP] - The alignment of the Y coordinate using [Enums/TEXT_ALIGN](https://wiki.facepunch.com/gmod/Enums/TEXT_ALIGN).
      */
-    function SimpleText(text: string, font?: string, x = 0, y = 0, color?: Color, xAlign?: number, yAlign?: number): LuaMultiReturn<[number, number]>;
+    function SimpleText(text: string, font?: string, x = 0, y = 0, color?: Color, xAlign?: TEXT_ALIGN, yAlign?: TEXT_ALIGN): LuaMultiReturn<[number, number]>;
     
     /**
      * [Client and Menu]
@@ -61787,7 +61787,7 @@ declare namespace draw {
      * @param outlinewidth - Width of the outline.
      * @param [outlinecolor = Color( 255, 255, 255, 255 )] - Color of the outline. Uses the [Color](https://wiki.facepunch.com/gmod/Color).
      */
-    function SimpleTextOutlined(Text: string, font?: string, x = 0, y = 0, color?: Color, xAlign?: number, yAlign?: number, outlinewidth: number, outlinecolor?: Color): LuaMultiReturn<[number, number]>;
+    function SimpleTextOutlined(Text: string, font?: string, x = 0, y = 0, color?: Color, xAlign?: TEXT_ALIGN, yAlign?: TEXT_ALIGN, outlinewidth: number, outlinecolor?: Color): LuaMultiReturn<[number, number]>;
     
     /**
      * [Client and Menu]
@@ -61797,7 +61797,7 @@ declare namespace draw {
      * <rendercontext hook="false" type="2D"></rendercontext>
      * @param textdata - The text properties. See the [Structures/TextData](https://wiki.facepunch.com/gmod/Structures/TextData)
      */
-    function Text(textdata: any): LuaMultiReturn<[number, number]>;
+    function Text(textdata: TextData): LuaMultiReturn<[number, number]>;
     
     /**
      * [Client and Menu]
@@ -61809,7 +61809,7 @@ declare namespace draw {
      * @param distance - How far away the shadow appears.
      * @param [alpha = 200] - How visible the shadow is (0-255).
      */
-    function TextShadow(textdata: any, distance: number, alpha = 200): LuaMultiReturn<[number, number]>;
+    function TextShadow(textdata: TextData, distance: number, alpha = 200): LuaMultiReturn<[number, number]>;
     
     /**
      * [Client and Menu]
@@ -61819,7 +61819,7 @@ declare namespace draw {
      * <rendercontext hook="false" type="2D"></rendercontext>
      * @param texturedata - The texture properties. See [Structures/TextureData](https://wiki.facepunch.com/gmod/Structures/TextureData).
      */
-    function TexturedQuad(texturedata: any): void;
+    function TexturedQuad(texturedata: TextureData): void;
     
     /**
      * [Client and Menu]
@@ -61837,7 +61837,7 @@ declare namespace draw {
      * @param [xalign = TEXT_ALIGN_LEFT] - The alignment of the X coordinate using [Enums/TEXT_ALIGN](https://wiki.facepunch.com/gmod/Enums/TEXT_ALIGN).
      * @param [yalign = TEXT_ALIGN_TOP] - The alignment of the Y coordinate using [Enums/TEXT_ALIGN](https://wiki.facepunch.com/gmod/Enums/TEXT_ALIGN).
      */
-    function WordBox(bordersize: number, x: number, y: number, text: string, font: string, boxcolor: Color, textcolor: Color, xalign?: number, yalign?: number): LuaMultiReturn<[number, number]>;
+    function WordBox(bordersize: number, x: number, y: number, text: string, font: string, boxcolor: Color, textcolor: Color, xalign?: TEXT_ALIGN, yalign?: TEXT_ALIGN): LuaMultiReturn<[number, number]>;
 
 }
 
@@ -61854,7 +61854,7 @@ declare namespace drive {
      * @param ply - The player
      * @param view - The view, see [Structures/ViewData](https://wiki.facepunch.com/gmod/Structures/ViewData)
      */
-    function CalcView(ply: Player, view: any): boolean;
+    function CalcView(ply: Player, view: ViewData): boolean;
     
     /**
      * [Shared]
@@ -62037,7 +62037,7 @@ declare namespace duplicator {
      * Returns a table with some entity data that can be used to create a new entity with [duplicator.CreateEntityFromTable](https://wiki.facepunch.com/gmod/duplicator.CreateEntityFromTable)
      * @param ent - The entity table to save
      */
-    function CopyEntTable(ent: Entity): any;
+    function CopyEntTable(ent: Entity): EntityCopyData;
     
     /**
      * [Server]
@@ -62061,7 +62061,7 @@ declare namespace duplicator {
      * @param ply - The player who wants to create something
      * @param entTable - The duplication data to build the entity with. See [Structures/EntityCopyData](https://wiki.facepunch.com/gmod/Structures/EntityCopyData)
      */
-    function CreateEntityFromTable(ply: Player, entTable: any): Entity;
+    function CreateEntityFromTable(ply: Player, entTable: EntityCopyData): Entity;
     
     /**
      * [Shared]
@@ -62082,7 +62082,7 @@ declare namespace duplicator {
      * @param ent - The entity to be bone manipulated
      * @param bones - Table with a [Structures/BoneManipulationData](https://wiki.facepunch.com/gmod/Structures/BoneManipulationData) for every bone (that has manipulations applied) using the bone ID as the table index.
      */
-    function DoBoneManipulator(ent: Entity, bones: any): void;
+    function DoBoneManipulator(ent: Entity, bones: BoneManipulationData): void;
     
     /**
      * [Server]
@@ -62244,7 +62244,7 @@ declare namespace duplicator {
      * </callback>
      * @param args - Strings of the names of arguments you want passed to function the from the [Structures/EntityCopyData](https://wiki.facepunch.com/gmod/Structures/EntityCopyData). As a special case, "Data" will pass the whole structure.
      */
-    function RegisterEntityClass(name: string, function_: Function, ...args: any[]): void;
+    function RegisterEntityClass(name: string, function_: Function, args: EntityCopyData): void;
     
     /**
      * [Shared]
@@ -62591,7 +62591,7 @@ declare namespace engine {
      * Returns video recording settings set by [video.Record](https://wiki.facepunch.com/gmod/video.Record). Used by Demo-To-Video feature.
      * 
      */
-    function VideoSettings(): any;
+    function VideoSettings(): VideoData;
     
     /**
      * [Client]
@@ -62787,7 +62787,7 @@ declare namespace ents {
      * @param usetype - Use type. See the [Enums/USE](https://wiki.facepunch.com/gmod/Enums/USE).
      * @param value - This value is passed to [ENTITY:Use](https://wiki.facepunch.com/gmod/ENTITY:Use), but isn't used by any default entities in the engine.
      */
-    function FireTargets(target: string, activator: Entity, caller: Entity, usetype: number, value: number): void;
+    function FireTargets(target: string, activator: Entity, caller: Entity, usetype: USE, value: number): void;
     
     /**
      * [Shared]
@@ -62902,7 +62902,7 @@ declare namespace file {
      * </callback>
      * @param [sync = false] - If `true` the file will be read synchronously.
      */
-    function AsyncRead(fileName: string, gamePath: string, callback: Function, sync = false): number;
+    function AsyncRead(fileName: string, gamePath: string, callback: FSASYNC, sync = false): number;
     
     /**
      * [Shared and Menu]
@@ -63153,7 +63153,7 @@ declare namespace game {
      * 
      * @param ammoData - The attributes of the ammo. See the [Structures/AmmoData](https://wiki.facepunch.com/gmod/Structures/AmmoData).
      */
-    function AddAmmoType(ammoData: any): void;
+    function AddAmmoType(ammoData: AmmoData): void;
     
     /**
      * [Shared]
@@ -63237,7 +63237,7 @@ declare namespace game {
      * Returns the damage type of given ammo type.
      * @param id - Ammo ID to retrieve the damage type of. Starts from 1.
      */
-    function GetAmmoDamageType(id: number): number;
+    function GetAmmoDamageType(id: number): DMG;
     
     /**
      * [Shared]
@@ -63245,7 +63245,7 @@ declare namespace game {
      * Returns the [Structures/AmmoData](https://wiki.facepunch.com/gmod/Structures/AmmoData) for given ID.
      * @param id - ID of the ammo type to look up the data for
      */
-    function GetAmmoData(id: number): any;
+    function GetAmmoData(id: number): AmmoData;
     
     /**
      * [Shared]
@@ -63329,7 +63329,7 @@ declare namespace game {
      * If the Global State by that name does not exist, **GLOBAL_DEAD** will be returned.
      * See [Global States](https://wiki.facepunch.com/gmod/Global_States) for a list of default global states.
      */
-    function GetGlobalState(name: string): number;
+    function GetGlobalState(name: string): GLOBAL;
     
     /**
      * [Shared]
@@ -63502,7 +63502,7 @@ declare namespace game {
      * See [Global States](https://wiki.facepunch.com/gmod/Global_States) for a list of default global states.
      * @param state - The state of the Global State. See [Enums/GLOBAL](https://wiki.facepunch.com/gmod/Enums/GLOBAL)
      */
-    function SetGlobalState(name: string, state: number): void;
+    function SetGlobalState(name: string, state: GLOBAL): void;
     
     /**
      * [Server]
@@ -63750,7 +63750,7 @@ declare namespace gui {
      * Simulates a key press for the given key.
      * @param key - The key, see [Enums/KEY](https://wiki.facepunch.com/gmod/Enums/KEY).
      */
-    function InternalKeyCodePressed(key: number): void;
+    function InternalKeyCodePressed(key: KEY): void;
     
     /**
      * [Client and Menu]
@@ -63758,7 +63758,7 @@ declare namespace gui {
      * Simulates a key release for the given key.
      * @param key - The key, see [Enums/KEY](https://wiki.facepunch.com/gmod/Enums/KEY).
      */
-    function InternalKeyCodeReleased(key: number): void;
+    function InternalKeyCodeReleased(key: KEY): void;
     
     /**
      * [Client and Menu]
@@ -63766,7 +63766,7 @@ declare namespace gui {
      * Simulates a key type typing to the specified key.
      * @param key - The key, see [Enums/KEY](https://wiki.facepunch.com/gmod/Enums/KEY).
      */
-    function InternalKeyCodeTyped(key: number): void;
+    function InternalKeyCodeTyped(key: KEY): void;
     
     /**
      * [Client and Menu]
@@ -63784,7 +63784,7 @@ declare namespace gui {
      * Simulates a double mouse key press for the given mouse key.
      * @param key - The key, see [Enums/MOUSE](https://wiki.facepunch.com/gmod/Enums/MOUSE).
      */
-    function InternalMouseDoublePressed(key: number): void;
+    function InternalMouseDoublePressed(key: MOUSE): void;
     
     /**
      * [Client and Menu]
@@ -63792,7 +63792,7 @@ declare namespace gui {
      * Simulates a mouse key press for the given mouse key.
      * @param key - The key, see [Enums/MOUSE](https://wiki.facepunch.com/gmod/Enums/MOUSE).
      */
-    function InternalMousePressed(key: number): void;
+    function InternalMousePressed(key: MOUSE): void;
     
     /**
      * [Client and Menu]
@@ -63800,7 +63800,7 @@ declare namespace gui {
      * Simulates a mouse key release for the given mouse key.
      * @param key - The key, see [Enums/MOUSE](https://wiki.facepunch.com/gmod/Enums/MOUSE).
      */
-    function InternalMouseReleased(key: number): void;
+    function InternalMouseReleased(key: MOUSE): void;
     
     /**
      * [Client and Menu]
@@ -64223,7 +64223,7 @@ declare namespace input {
      * Returns the last key captured by key trapping.
      * 
      */
-    function CheckKeyTrapping(): number;
+    function CheckKeyTrapping(): KEY;
     
     /**
      * [Client and Menu]
@@ -64231,7 +64231,7 @@ declare namespace input {
      * Returns the digital value of an analog stick on the current (set up via convars) controller.
      * @param axis - The analog axis to poll. See [Enums/ANALOG](https://wiki.facepunch.com/gmod/Enums/ANALOG).
      */
-    function GetAnalogValue(axis: number): number;
+    function GetAnalogValue(axis: ANALOG): number;
     
     /**
      * [Client and Menu]
@@ -64251,7 +64251,7 @@ declare namespace input {
      * Gets the button code from a button name. This is opposite of [input.GetKeyName](https://wiki.facepunch.com/gmod/input.GetKeyName).
      * @param button - The internal button name, such as <key>E</key> or <key>SHIFT</key>.
      */
-    function GetKeyCode(button: string): number;
+    function GetKeyCode(button: string): BUTTON_CODE;
     
     /**
      * [Client and Menu]
@@ -64263,7 +64263,7 @@ declare namespace input {
      * 
      * @param button - The button, see [Enums/BUTTON_CODE](https://wiki.facepunch.com/gmod/Enums/BUTTON_CODE).
      */
-    function GetKeyName(button: number): string;
+    function GetKeyName(button: BUTTON_CODE): string;
     
     /**
      * [Client and Menu]
@@ -64273,7 +64273,7 @@ declare namespace input {
      * Unlike [input.IsKeyDown](https://wiki.facepunch.com/gmod/input.IsKeyDown) this can also detect joystick presses from [Enums/JOYSTICK](https://wiki.facepunch.com/gmod/Enums/JOYSTICK)
      * @param button - The button, valid values are in the range of [Enums/BUTTON_CODE](https://wiki.facepunch.com/gmod/Enums/BUTTON_CODE).
      */
-    function IsButtonDown(button: number): boolean;
+    function IsButtonDown(button: BUTTON_CODE): boolean;
     
     /**
      * [Client and Menu]
@@ -64289,7 +64289,7 @@ declare namespace input {
      * Gets whether a key is down.
      * @param key - The key, see [Enums/KEY](https://wiki.facepunch.com/gmod/Enums/KEY).
      */
-    function IsKeyDown(key: number): boolean;
+    function IsKeyDown(key: KEY): boolean;
     
     /**
      * [Client and Menu]
@@ -64305,7 +64305,7 @@ declare namespace input {
      * Gets whether a mouse button is down
      * @param mouseKey - The key, see [Enums/MOUSE](https://wiki.facepunch.com/gmod/Enums/MOUSE)
      */
-    function IsMouseDown(mouseKey: number): boolean;
+    function IsMouseDown(mouseKey: MOUSE): boolean;
     
     /**
      * [Client and Menu]
@@ -64330,7 +64330,7 @@ declare namespace input {
      * Returns the bind string that the given key is bound to.
      * @param key - Key from [Enums/BUTTON_CODE](https://wiki.facepunch.com/gmod/Enums/BUTTON_CODE)
      */
-    function LookupKeyBinding(key: number): string;
+    function LookupKeyBinding(key: BUTTON_CODE): string;
     
     /**
      * [Client]
@@ -64373,7 +64373,7 @@ declare namespace input {
      * This function only works in Move hooks, and will detect key presses even in main menu or when a typing in a text field.
      * @param key - The key, see [Enums/KEY](https://wiki.facepunch.com/gmod/Enums/KEY).
      */
-    function WasKeyPressed(key: number): boolean;
+    function WasKeyPressed(key: KEY): boolean;
     
     /**
      * [Client and Menu]
@@ -64383,7 +64383,7 @@ declare namespace input {
      * This function only works in Move hooks, and will detect key releases even in main menu or when a typing in a text field.
      * @param key - The key, see [Enums/KEY](https://wiki.facepunch.com/gmod/Enums/KEY).
      */
-    function WasKeyReleased(key: number): boolean;
+    function WasKeyReleased(key: KEY): boolean;
     
     /**
      * [Client and Menu]
@@ -64393,7 +64393,7 @@ declare namespace input {
      * This function only works in Move hooks, and will detect key events even in main menu or when a typing in a text field.
      * @param key - The key to test, see [Enums/KEY](https://wiki.facepunch.com/gmod/Enums/KEY)
      */
-    function WasKeyTyped(key: number): boolean;
+    function WasKeyTyped(key: KEY): boolean;
     
     /**
      * [Client and Menu]
@@ -64405,7 +64405,7 @@ declare namespace input {
      * This function only works in Move hooks, and will detect mouse events even in main menu or when a typing in a text field.
      * @param button - The mouse button to test, see [Enums/MOUSE](https://wiki.facepunch.com/gmod/Enums/MOUSE)
      */
-    function WasMouseDoublePressed(button: number): boolean;
+    function WasMouseDoublePressed(button: MOUSE): boolean;
     
     /**
      * [Client and Menu]
@@ -64417,7 +64417,7 @@ declare namespace input {
      * This function only works in Move hooks, and will detect mouse events even in main menu or when a typing in a text field.
      * @param key - The key, see [Enums/MOUSE](https://wiki.facepunch.com/gmod/Enums/MOUSE)
      */
-    function WasMousePressed(key: number): boolean;
+    function WasMousePressed(key: MOUSE): boolean;
     
     /**
      * [Client and Menu]
@@ -64427,7 +64427,7 @@ declare namespace input {
      * This function only works in Move hooks, and will detect mouse events even in main menu or when a typing in a text field.
      * @param key - The key to test, see [Enums/MOUSE](https://wiki.facepunch.com/gmod/Enums/MOUSE)
      */
-    function WasMouseReleased(key: number): boolean;
+    function WasMouseReleased(key: MOUSE): boolean;
 
 }
 
@@ -65556,7 +65556,7 @@ declare namespace matproxy {
      * Register a material proxy. See [matproxy](https://wiki.facepunch.com/gmod/matproxy) for more general explanation of what they are.
      * @param matProxyData - The information about the proxy. See [Structures/MatProxyData](https://wiki.facepunch.com/gmod/Structures/MatProxyData)
      */
-    function Add(matProxyData: any): void;
+    function Add(matProxyData: MatProxyData): void;
     
     /**
      * [Client]
@@ -65671,7 +65671,7 @@ declare namespace mesh {
      * 			For a full list of the available options, see the [Enums/MATERIAL](https://wiki.facepunch.com/gmod/Enums/MATERIAL).
      * @param primitiveCount - The quantity of primitives this mesh will contain as a whole integer number.
      */
-    function Begin(primitiveType: number, primitiveCount: number): void;
+    function Begin(primitiveType: MATERIAL, primitiveCount: number): void;
     
     /**
      * [Client]
@@ -66438,7 +66438,7 @@ declare namespace net {
      * 
      * @param [typeID = net.ReadUInt(8)] - The type of value to be read, using [Enums/TYPE](https://wiki.facepunch.com/gmod/Enums/TYPE).
      */
-    function ReadType(typeID?: number): any;
+    function ReadType(typeID?: TYPE): any;
     
     /**
      * [Shared]
@@ -66886,7 +66886,7 @@ declare namespace notification {
      * @param type - Determines the notification method (e.g. icon) for displaying the notification. See the [Enums/NOTIFY](https://wiki.facepunch.com/gmod/Enums/NOTIFY).
      * @param length - The number of seconds to display the notification for.
      */
-    function AddLegacy(text: string, type: number, length: number): void;
+    function AddLegacy(text: string, type: NOTIFY, length: number): void;
     
     /**
      * [Client and Menu]
@@ -66922,7 +66922,7 @@ declare namespace numpad {
      * @param key - The key to press, see [Enums/KEY](https://wiki.facepunch.com/gmod/Enums/KEY)
      * @param [isButton = false] - Should this keypress pretend to be a from a `gmod_button`? (causes [numpad.FromButton](https://wiki.facepunch.com/gmod/numpad.FromButton) to return `true`)
      */
-    function Activate(ply: Player, key: number, isButton = false): void;
+    function Activate(ply: Player, key: KEY, isButton = false): void;
     
     /**
      * [Server]
@@ -66932,7 +66932,7 @@ declare namespace numpad {
      * @param key - The key to press, corresponding to [Enums/KEY](https://wiki.facepunch.com/gmod/Enums/KEY)
      * @param [isButton = false] - Should this keypress pretend to be a from a `gmod_button`? (causes [numpad.FromButton](https://wiki.facepunch.com/gmod/numpad.FromButton) to return `true`)
      */
-    function Deactivate(ply: Player, key: number, isButton = false): void;
+    function Deactivate(ply: Player, key: KEY, isButton = false): void;
     
     /**
      * [Server]
@@ -66955,7 +66955,7 @@ declare namespace numpad {
      * @param name - The name of the function to run, corresponding with the one used in [numpad.Register](https://wiki.facepunch.com/gmod/numpad.Register)
      * @param vararg - Arguments to pass to the function passed to [numpad.Register](https://wiki.facepunch.com/gmod/numpad.Register).
      */
-    function OnDown(ply: Player, key: number, name: string, ...vararg: any[]): number;
+    function OnDown(ply: Player, key: KEY, name: string, ...vararg: any[]): number;
     
     /**
      * [Server]
@@ -66968,7 +66968,7 @@ declare namespace numpad {
      * @param name - The name of the function to run, corresponding with the one used in [numpad.Register](https://wiki.facepunch.com/gmod/numpad.Register)
      * @param vararg - Arguments to pass to the function passed to [numpad.Register](https://wiki.facepunch.com/gmod/numpad.Register).
      */
-    function OnUp(ply: Player, key: number, name: string, ...vararg: any[]): number;
+    function OnUp(ply: Player, key: KEY, name: string, ...vararg: any[]): number;
     
     /**
      * [Server]
@@ -67000,7 +67000,7 @@ declare namespace numpad {
      * @param ply - The player whose numpad should be simulated
      * @param key - The key to press, corresponding to [Enums/KEY](https://wiki.facepunch.com/gmod/Enums/KEY)
      */
-    function Toggle(ply: Player, key: number): void;
+    function Toggle(ply: Player, key: KEY): void;
 
 }
 
@@ -67060,7 +67060,7 @@ declare namespace os {
      * 
      * @param [time = os.time()] - Time to use for the format.
      */
-    function date(format: string, time?: number): string;
+    function date(format: DateData, time?: number): DateData;
     
     /**
      * [Shared and Menu]
@@ -67077,7 +67077,7 @@ declare namespace os {
      * Returns the system time in seconds past the unix epoch. If a table is supplied, the function attempts to build a system time with the specified table members.
      * @param [dateData = nil] - Table to generate the time from. This table's data is interpreted as being in the local timezone. See [Structures/DateData](https://wiki.facepunch.com/gmod/Structures/DateData)
      */
-    function time(dateData?: any): number;
+    function time(dateData?: DateData): number;
 
 }
 
@@ -67223,7 +67223,7 @@ declare namespace physenv {
      * Gets the current performance settings in table form.
      * 
      */
-    function GetPerformanceSettings(): any;
+    function GetPerformanceSettings(): PhysEnvPerformanceSettings;
     
     /**
      * [Shared]
@@ -67251,7 +67251,7 @@ declare namespace physenv {
      * Sets the performance settings.
      * @param performanceSettings - The new performance settings. See [Structures/PhysEnvPerformanceSettings](https://wiki.facepunch.com/gmod/Structures/PhysEnvPerformanceSettings)
      */
-    function SetPerformanceSettings(performanceSettings: any): void;
+    function SetPerformanceSettings(performanceSettings: PhysEnvPerformanceSettings): void;
 
 }
 
@@ -67504,7 +67504,7 @@ declare namespace player_manager {
      * @param table - Class metatable, see [Structures/PLAYER](https://wiki.facepunch.com/gmod/Structures/PLAYER)
      * @param [base = nil] - Base class name
      */
-    function RegisterClass(name: string, table: any, base?: string): void;
+    function RegisterClass(name: string, table: PLAYER, base?: string): void;
     
     /**
      * [Shared]
@@ -67640,7 +67640,7 @@ declare namespace properties {
      * @param name - A unique name used to identify the property
      * @param propertyData - A table that defines the property. Uses the [Structures/PropertyAdd](https://wiki.facepunch.com/gmod/Structures/PropertyAdd).
      */
-    function Add(name: string, propertyData: any): void;
+    function Add(name: string, propertyData: PropertyAdd): void;
     
     /**
      * [Shared]
@@ -67748,7 +67748,7 @@ declare namespace render {
      * 
      * @param captureData - Parameters of the capture. See [Structures/RenderCaptureData](https://wiki.facepunch.com/gmod/Structures/RenderCaptureData).
      */
-    function Capture(captureData: any): string;
+    function Capture(captureData: RenderCaptureData): string;
     
     /**
      * [Client]
@@ -67908,7 +67908,7 @@ declare namespace render {
      * Sets the cull mode. The culling mode defines how back faces are culled when rendering geometry.
      * @param cullMode - Cullmode, see [Enums/MATERIAL_CULLMODE](https://wiki.facepunch.com/gmod/Enums/MATERIAL_CULLMODE)
      */
-    function CullMode(cullMode: number): void;
+    function CullMode(cullMode: MATERIAL_CULLMODE): void;
     
     /**
      * [Client]
@@ -68164,7 +68164,7 @@ declare namespace render {
      * Sets the mode of fog.
      * @param fogMode - Fog mode, see [Enums/MATERIAL_FOG](https://wiki.facepunch.com/gmod/Enums/MATERIAL_FOG).
      */
-    function FogMode(fogMode: number): void;
+    function FogMode(fogMode: MATERIAL_FOG): void;
     
     /**
      * [Client]
@@ -68252,7 +68252,7 @@ declare namespace render {
      * Returns the fog mode.
      * 
      */
-    function GetFogMode(): number;
+    function GetFogMode(): MATERIAL_FOG;
     
     /**
      * [Client]
@@ -68428,7 +68428,7 @@ declare namespace render {
      * Returns the current view setup.
      * @param [noPlayer = false] - If `true`, returns the `view->GetViewSetup`, if `false` - returns `view->GetPlayerViewSetup`
      */
-    function GetViewSetup(noPlayer = false): any;
+    function GetViewSetup(noPlayer = false): ViewSetup;
     
     /**
      * [Client]
@@ -68527,7 +68527,7 @@ declare namespace render {
      * @param blendingFunction - After the Source and Destination color and alpha have been multiplied against their corresponding multipliers, they are passed to the Blending Function which combines them into the final color and alpha for the pixel.  
      * 			One of the [Enums/BLENDFUNC](https://wiki.facepunch.com/gmod/Enums/BLENDFUNC) enums.
      */
-    function OverrideBlend(enabled: boolean, sourceMultiplier: number, destinationMultiplier: number, blendingFunction: number): void;
+    function OverrideBlend(enabled: boolean, sourceMultiplier: BLEND, destinationMultiplier: BLEND, blendingFunction: BLENDFUNC): void;
     
     /**
      * [Client and Menu]
@@ -68543,7 +68543,7 @@ declare namespace render {
      * @param [srcBlendAlpha = nil] - The source alpha blend function [Enums/BLEND](https://wiki.facepunch.com/gmod/Enums/BLEND). Determines how a rendered texture's final alpha should be calculated.
      * @param [destBlendAlpha = nil] - 
      */
-    function OverrideBlendFunc(enabled: boolean, srcBlend: number, destBlend: number, srcBlendAlpha?: number, destBlendAlpha?: number): void;
+    function OverrideBlendFunc(enabled: boolean, srcBlend: BLEND, destBlend: number, srcBlendAlpha?: BLEND, destBlendAlpha?: number): void;
     
     /**
      * [Client and Menu]
@@ -68648,7 +68648,7 @@ declare namespace render {
      * 		For more detailed information and a usage example, see <page text="the texture minification and magnification render reference.">render_min_mag_filters</page>
      * @param texFilterType - The texture filter to use. For available options, see [Enums/TEXFILTER](https://wiki.facepunch.com/gmod/Enums/TEXFILTER)
      */
-    function PushFilterMag(texFilterType: number): void;
+    function PushFilterMag(texFilterType: TEXFILTER): void;
     
     /**
      * [Client and Menu]
@@ -68662,7 +68662,7 @@ declare namespace render {
      * 		For more detailed information and a usage example, see <page text="the texture minification and magnification render reference.">render_min_mag_filters</page>
      * @param texFilterType - The texture filter to use. For available options, see [Enums/TEXFILTER](https://wiki.facepunch.com/gmod/Enums/TEXFILTER)
      */
-    function PushFilterMin(texFilterType: number): void;
+    function PushFilterMin(texFilterType: TEXFILTER): void;
     
     /**
      * [Client]
@@ -68746,7 +68746,7 @@ declare namespace render {
      * 
      * @param [view = nil] - The view data to be used in the rendering. See [Structures/ViewData](https://wiki.facepunch.com/gmod/Structures/ViewData). Any missing value is assumed to be that of the current view. Similarly, you can make a normal render by simply not passing this table at all.
      */
-    function RenderView(view?: any): void;
+    function RenderView(view?: ViewData): void;
     
     /**
      * [Client]
@@ -68914,7 +68914,7 @@ declare namespace render {
      * Disables all local lights if called with no arguments.
      * @param [lights = {}] - A table containing up to 4 tables for each light source that should be set up. Each of these tables should contain the properties of its associated light source, see [Structures/LocalLight](https://wiki.facepunch.com/gmod/Structures/LocalLight).
      */
-    function SetLocalModelLights(lights?: any): void;
+    function SetLocalModelLights(lights?: LocalLight): void;
     
     /**
      * [Client]
@@ -68937,7 +68937,7 @@ declare namespace render {
      * @param green - The green component of the light color.
      * @param blue - The blue component of the light color.
      */
-    function SetModelLighting(lightDirection: number, red: number, green: number, blue: number): void;
+    function SetModelLighting(lightDirection: BOX, red: number, green: number, blue: number): void;
     
     /**
      * [Client]
@@ -69508,7 +69508,7 @@ declare namespace scripted_ents {
      * Returns a list of all ENT tables which contain ENT.Spawnable
      * 
      */
-    function GetSpawnable(): any;
+    function GetSpawnable(): ENT;
     
     /**
      * [Shared]
@@ -69561,7 +69561,7 @@ declare namespace scripted_ents {
      * 			For the table's format and available options see the [Structures/ENT](https://wiki.facepunch.com/gmod/Structures/ENT) page.
      * @param classname - The classname to register.
      */
-    function Register(ENT: any, classname: string): void;
+    function Register(ENT: ENT, classname: string): void;
 
 }
 
@@ -69648,7 +69648,7 @@ declare namespace serverlist {
      * @param callback - The function to be called if and when the request finishes.
      * Callback has arguments described here: [Structures/ServerQueryData](https://wiki.facepunch.com/gmod/Structures/ServerQueryData).
      */
-    function PingServer(ip: string, callback: Function): void;
+    function PingServer(ip: string, callback: ServerQueryData): void;
     
     /**
      * [Menu]
@@ -69673,7 +69673,7 @@ declare namespace serverlist {
      * Queries the master server for server list.
      * @param data - The information about what kind of servers we want. See [Structures/ServerQueryData](https://wiki.facepunch.com/gmod/Structures/ServerQueryData).
      */
-    function Query(data: any): void;
+    function Query(data: ServerQueryData): void;
     
     /**
      * [Menu]
@@ -69701,7 +69701,7 @@ declare namespace sound {
      * A list of sound scripts can be retrieved with [sound.GetTable](https://wiki.facepunch.com/gmod/sound.GetTable).
      * @param soundData - The sounds properties. See [Structures/SoundData](https://wiki.facepunch.com/gmod/Structures/SoundData)
      */
-    function Add(soundData: any): void;
+    function Add(soundData: SoundData): void;
     
     /**
      * [Shared]
@@ -69721,7 +69721,7 @@ declare namespace sound {
      * @param duration - The duration of the hint in seconds
      * @param [owner = NULL] - If set, the sound hint will be ignored/deleted when the given entity is destroyed.
      */
-    function EmitHint(hint: number, pos: Vector, volume: number, duration: number, owner?: Entity): void;
+    function EmitHint(hint: SOUND, pos: Vector, volume: number, duration: number, owner?: Entity): void;
     
     /**
      * [Client]
@@ -69761,7 +69761,7 @@ declare namespace sound {
      * Returns properties of the soundscript.
      * @param name - The name of the sound script
      */
-    function GetProperties(name: string): any;
+    function GetProperties(name: string): SoundData;
     
     /**
      * [Shared]
@@ -70042,7 +70042,7 @@ declare namespace spawnmenu {
      * Returns the list of Creation tabs. Creation tabs are added via [spawnmenu.AddCreationTab](https://wiki.facepunch.com/gmod/spawnmenu.AddCreationTab).
      * 
      */
-    function GetCreationTabs(): any;
+    function GetCreationTabs(): CreationMenus;
     
     /**
      * [Client]
@@ -70334,7 +70334,7 @@ declare namespace steamworks {
      * 	<arg type="table" name="data">The data about the item, if the request succeeded, `nil` otherwise. See [Structures/UGCFileInfo](https://wiki.facepunch.com/gmod/Structures/UGCFileInfo).</arg>
      * </callback>
      */
-    function FileInfo(workshopItemID: string, resultCallback: Function): void;
+    function FileInfo(workshopItemID: string, resultCallback: UGCFileInfo): void;
     
     /**
      * [Shared and Menu]
@@ -70502,7 +70502,7 @@ declare namespace steamworks {
      * 	<arg type="table" name="data">The vote information. See [Structures/UGCFileInfo](https://wiki.facepunch.com/gmod/Structures/UGCFileInfo).</arg>
      * </callback>
      */
-    function VoteInfo(workshopItemID: string, resultCallback: Function): void;
+    function VoteInfo(workshopItemID: string, resultCallback: UGCFileInfo): void;
 
 }
 
@@ -71041,7 +71041,7 @@ declare namespace surface {
      * @param fontName - The new font name.
      * @param fontData - The font properties. See the [Structures/FontData](https://wiki.facepunch.com/gmod/Structures/FontData).
      */
-    function CreateFont(fontName: string, fontData: any): void;
+    function CreateFont(fontName: string, fontData: FontData): void;
     
     /**
      * [Client and Menu]
@@ -71115,7 +71115,7 @@ declare namespace surface {
      * @param vertices - A table containing integer vertices. See the [Structures/PolygonVertex](https://wiki.facepunch.com/gmod/Structures/PolygonVertex).
      * **The vertices must be in clockwise order.**
      */
-    function DrawPoly(vertices: any): void;
+    function DrawPoly(vertices: PolygonVertex): void;
     
     /**
      * [Client and Menu]
@@ -72670,7 +72670,7 @@ declare namespace undo {
      * You should use `gm_undo` or `gm_undonum *num*` console commands instead of calling this function directly.
      * @param tab - The undo block to process as an [Structures/Undo](https://wiki.facepunch.com/gmod/Structures/Undo)
      */
-    function Do_Undo(tab: any): number;
+    function Do_Undo(tab: Undo): number;
     
     /**
      * [Server]
@@ -73107,7 +73107,7 @@ declare namespace util {
      * @param [context = TEXT_FILTER_UNKNOWN] - Filtering context. See [Enums/TEXT_FILTER](https://wiki.facepunch.com/gmod/Enums/TEXT_FILTER).
      * @param [player = nil] - Used to determine if the text should be filtered according to local user's Steam chat filtering settings.
      */
-    function FilterText(str: string, context?: number, player?: Player): string;
+    function FilterText(str: string, context?: TEXT_FILTER, player?: Player): string;
     
     /**
      * [Menu]
@@ -73127,7 +73127,7 @@ declare namespace util {
      * See [util.GetActivityNameByID](https://wiki.facepunch.com/gmod/util.GetActivityNameByID) for a function that does the opposite.
      * @param __unnamedArg - The name of an activity, as defined in the model's `.qc` at compile time.
      */
-    function GetActivityIDByName(__unnamedArg: string): number;
+    function GetActivityIDByName(__unnamedArg: string): ACT;
     
     /**
      * [Shared]
@@ -73137,7 +73137,7 @@ declare namespace util {
      * See [util.GetActivityIDByName](https://wiki.facepunch.com/gmod/util.GetActivityIDByName) for a function that does the opposite.
      * @param id - The ID of an activity from some hook. See also [Enums/ACT](https://wiki.facepunch.com/gmod/Enums/ACT).
      */
-    function GetActivityNameByID(id: number): string;
+    function GetActivityNameByID(id: ACT): string;
     
     /**
      * [Shared]
@@ -73232,7 +73232,7 @@ declare namespace util {
      * @param ply - The player the trace should be based on
      * @param [dir = ply:GetAimVector()] - The direction of the trace. By default falls back to the direction the player is looking in.
      */
-    function GetPlayerTrace(ply: Player, dir?: Vector): any;
+    function GetPlayerTrace(ply: Player, dir?: Vector): Trace;
     
     /**
      * [Client]
@@ -73240,7 +73240,7 @@ declare namespace util {
      * Gets information about the sun position and obstruction or nil if there is no sun.
      * 
      */
-    function GetSunInfo(): any;
+    function GetSunInfo(): SunInfo;
     
     /**
      * [Shared]
@@ -73248,7 +73248,7 @@ declare namespace util {
      * Returns data of a surface property at given ID.
      * @param id - Surface property ID. You can get it from [Structures/TraceResult](https://wiki.facepunch.com/gmod/Structures/TraceResult).
      */
-    function GetSurfaceData(id: number): any;
+    function GetSurfaceData(id: TraceResult): SurfacePropertyData;
     
     /**
      * [Shared]
@@ -73268,7 +73268,7 @@ declare namespace util {
      * See also [util.GetSurfaceData](https://wiki.facepunch.com/gmod/util.GetSurfaceData) and [util.GetSurfaceIndex](https://wiki.facepunch.com/gmod/util.GetSurfaceIndex) for opposite function.
      * @param id - Surface property ID. You can get it from [Structures/TraceResult](https://wiki.facepunch.com/gmod/Structures/TraceResult).
      */
-    function GetSurfacePropName(id: number): string;
+    function GetSurfacePropName(id: TraceResult): string;
     
     /**
      * [Server]
@@ -73629,7 +73629,7 @@ declare namespace util {
      * 
      * @param position - Position to get the contents sample from.
      */
-    function PointContents(position: Vector): number;
+    function PointContents(position: Vector): CONTENTS;
     
     /**
      * [Shared]
@@ -73673,7 +73673,7 @@ declare namespace util {
      * @param dir - The direction of the trace times the distance of the trace. This is added to the origin to determine the endpos.
      * @param [filter = nil] - Entity which should be ignored by the trace. Can also be a table of entities or a function - see [Structures/Trace](https://wiki.facepunch.com/gmod/Structures/Trace).
      */
-    function QuickTrace(origin: Vector, dir: Vector, filter?: Entity): any;
+    function QuickTrace(origin: Vector, dir: Vector, filter?: Trace): TraceResult;
     
     /**
      * [Menu]
@@ -73905,7 +73905,7 @@ declare namespace util {
      * @param tracedata - Trace data. See [Structures/Trace](https://wiki.facepunch.com/gmod/Structures/Trace)
      * @param ent - The entity to use
      */
-    function TraceEntity(tracedata: any, ent: Entity): any;
+    function TraceEntity(tracedata: Trace, ent: Entity): TraceResult;
     
     /**
      * [Shared]
@@ -73914,7 +73914,7 @@ declare namespace util {
      * @param tracedata - Trace data. See [Structures/Trace](https://wiki.facepunch.com/gmod/Structures/Trace)
      * @param ent - The entity to use mins/maxs of for the hull trace.
      */
-    function TraceEntityHull(tracedata: any, ent: Entity): any;
+    function TraceEntityHull(tracedata: Trace, ent: Entity): TraceResult;
     
     /**
      * [Shared]
@@ -73930,7 +73930,7 @@ declare namespace util {
      * 
      * @param TraceData - The trace data to use. See [Structures/HullTrace](https://wiki.facepunch.com/gmod/Structures/HullTrace)
      */
-    function TraceHull(TraceData: any): any;
+    function TraceHull(TraceData: HullTrace): TraceResult;
     
     /**
      * [Shared]
@@ -73949,7 +73949,7 @@ declare namespace util {
      * 			
      * 			For the table's format and available options see the [Structures/Trace](https://wiki.facepunch.com/gmod/Structures/Trace) page.
      */
-    function TraceLine(traceConfig: any): any;
+    function TraceLine(traceConfig: Trace): any;
     
     /**
      * [Shared and Menu]
@@ -73978,7 +73978,7 @@ declare namespace util {
          * Finishes the world picking. This is called when a user presses their mouse after calling [util.worldpicker.Start](https://wiki.facepunch.com/gmod/util.worldpicker.Start).
          * @param tr - [Structures/TraceResult](https://wiki.facepunch.com/gmod/Structures/TraceResult) from the mouse press
          */
-        function Finish(tr: any): void;
+        function Finish(tr: TraceResult): void;
         
         /**
          * [Client]
@@ -74177,7 +74177,7 @@ declare namespace video {
      * Attempts to create an [IVideoWriter](https://wiki.facepunch.com/gmod/IVideoWriter).
      * @param config - The video config. See [Structures/VideoData](https://wiki.facepunch.com/gmod/Structures/VideoData).
      */
-    function Record(config: any): LuaMultiReturn<[IVideoWriter, string]>;
+    function Record(config: VideoData): LuaMultiReturn<[IVideoWriter, string]>;
 
 }
 
@@ -74256,7 +74256,7 @@ declare namespace weapons {
      * 			For the table's format and available options see the [Structures/SWEP](https://wiki.facepunch.com/gmod/Structures/SWEP) page.
      * @param classname - Classname to assign to that swep
      */
-    function Register(ENT: any, classname: string): void;
+    function Register(ENT: SWEP, classname: string): void;
 
 }
 

@@ -62,7 +62,7 @@ function transformArgs(func: WikiFunction): TSArgument[] {
 
         let id = (type == 'vararg' ? '...' : '') + transformIdentifier(arg.name)
 
-        if(id == "delete") id = "shouldDelete"
+        if (id == "delete") id = "shouldDelete"
 
         return {
             identifier: id,
@@ -79,22 +79,50 @@ function inferType(type: string, desc: string) {
         const renameMods = mods.filter(isRenameIndentifierModification);
         if (renameMods.length > 0) {
             type = renameMods[0].newName;
+        } else if (links[1].includes('Structures')) {
+            type = links[1].split('/')[1];
+        } else if (links[1].includes('Enum')) {
+            type = links[1].split('/')[1];
         } else if (links[1] === 'Color') {
             type = 'Color';
         }
     }
 
-    if(type.includes('/')) {
+    if (!type.includes('/')) return type;
 
-        let slashSplit = type.split('/');
 
-        if (slashSplit.length > 1) {
-            type = slashSplit[1];
-        }
-    }
+    let slashSplit = type.split('/');
+
+    if (slashSplit.length < 2) return type;
+
+    if (slashSplit[0] == 'Structures' || slashSplit[0] == "Enums") return slashSplit[1];
 
     return type;
 }
+
+// function inferType(type: string, desc: string) {
+//     const links = desc.match(/<page>(.*?)<\/page>/);
+//     if (links) {
+//         const mods = getPageMods(links[1]);
+//         const renameMods = mods.filter(isRenameIndentifierModification);
+//         if (renameMods.length > 0) {
+//             type = renameMods[0].newName;
+//         } else if (links[1] === 'Color') {
+//             type = 'Color';
+//         }
+//     }
+
+//     if(type.includes('/')) {
+
+//         let slashSplit = type.split('/');
+
+//         if (slashSplit.length > 1) {
+//             type = slashSplit[1];
+//         }
+//     }
+
+//     return type;
+// }
 
 function transformReturns(func: WikiFunction): TSReturn {
     const rets = func.rets;
