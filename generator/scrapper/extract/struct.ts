@@ -27,6 +27,8 @@ export function extractStruct(page: WikiPage): WikiStruct {
 }
 
 function itemObjToStructObj(itemObj: any): WikiStructItem {
+
+    // console.log(itemObj);
     return {
         kind: WikiElementKind.StructItem,
         name: itemObj.attr.name,
@@ -34,5 +36,6 @@ function itemObjToStructObj(itemObj: any): WikiStructItem {
         address: '',
         type: itemObj.attr.type,
         description: itemObj.__text ? itemObj.__text.trim() : '',
+        default: itemObj.attr.default,
     };
 }
